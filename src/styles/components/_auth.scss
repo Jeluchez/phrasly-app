@@ -1,0 +1,112 @@
+
+.auth__main {
+    align-items: center;
+    background-color: $primary;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    height: 100vh;
+    width: 100vw;
+}
+
+.auth__box-container {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+}
+.auth__phrase-container{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 500px;
+    justify-content: flex-end;
+    background-color: #83E1FF;
+   
+}
+.auth__phrase{
+   margin: auto 0;
+   padding: 20px;
+}
+.auth__picture{
+    background: url(../../images/Vorderrhein.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 150%;
+    object-fit: cover;
+
+    height: 50%
+}
+.auth__form{
+    width: 380px;
+}
+.auth__social-nets{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .btn{
+        text-align: right;
+        font-size: 14px;
+        width: 150px;
+        height: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        border-radius: 0;
+        position: relative;
+
+        &::after{
+            content:"";
+            display: block;
+            height: 1px;
+            width: inherit;
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            background: $light-grey;
+        }
+    }
+    .btn-google{
+        background: #5969F9;
+        color: white;
+    }
+    
+    .google-icon{
+        width: 20px;
+        background: #fff;
+
+    }
+    .facebook-icon{
+        width: 12px;
+    }
+}
+.auth_form-login{
+    padding: 0 20px;
+    i,svg{
+        margin-right: 10px;
+        color: $light-grey;  
+    }
+}
+.auth__input-containter{
+    margin: 30px 0;
+    border: 1px solid $light-grey;
+    height: 35px;
+}
+.auth__input, .auth__input + button{
+    border: none;
+    outline-style: none;
+}
+.auth__log-for-container div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.auth__forgot-password{
+   margin-bottom: 0;
+}
+.auth__create-acount{
+    margin-top:  40px;
+    text-align: center;
+}
+
