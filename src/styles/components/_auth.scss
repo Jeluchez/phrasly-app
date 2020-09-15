@@ -13,19 +13,19 @@
     background-color: white;
     display: flex;
     flex-direction: row;
+    height: 500px;
 }
 .auth__phrase-container{
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 500px;
-    justify-content: flex-end;
     background-color: #83E1FF;
-   
 }
 .auth__phrase{
-   margin: auto 0;
-   padding: 20px;
+    box-sizing: border-box;
+    margin: auto 0;
+    padding: 20px;
+    height: 50%
 }
 .auth__picture{
     background: url(../../images/Vorderrhein.png);
@@ -37,6 +37,7 @@
     height: 50%
 }
 .auth__form{
+    height: 500px;
     width: 380px;
 }
 .auth__social-nets{
@@ -80,15 +81,16 @@
         width: 12px;
     }
 }
-.auth_form-login{
+.auth__form-login{
     padding: 0 20px;
     i,svg{
         margin-right: 10px;
         color: $light-grey;  
     }
+    height: auto;
 }
 .auth__input-containter{
-    margin: 30px 0;
+    margin: 25px 0;
     border: 1px solid $light-grey;
     height: 35px;
 }
@@ -96,7 +98,7 @@
     border: none;
     outline-style: none;
 }
-.auth__log-for-container div{
+.auth__log-for-container > div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,3 +112,34 @@
     text-align: center;
 }
 
+/* ----------------------------- auth__register ----------------------------- */
+.auth__register{
+    background: #FFF0C9;
+}
+.auth__register-picture{
+    background: url(../../images/Waiau.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 150%;
+    object-fit: cover;
+
+    height: 50%
+}
+.auth__register-password{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(0, auto));
+    // justify-content: space-between;
+    .auth__input{
+        border: 1px solid $light-grey;
+        outline-style: none;
+    }
+}
+.auth_show-password{
+    background: none;
+    border: none;
+    cursor: pointer;
+    i,svg{
+        margin: 0;
+    }
+}

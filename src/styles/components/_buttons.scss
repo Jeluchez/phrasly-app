@@ -1,26 +1,83 @@
-
 .btn-primary {
     background-color: $primary;
     border-radius: 2px;
-    
+
     &:disabled {
         background-color: lighten($color: $primary, $amount: 15);
     }
 
-    &:hover { 
+    &:hover {
         background-color: darken($color: $primary, $amount: 15);
     }
 }
-.btn-danger{
-    background-color:rgb(250, 119, 119) ;
+
+.btn-danger {
+    background-color: rgb(250, 119, 119);
     transition: background-color .3s ease;
-    &:hover{
+
+    &:hover {
         background-color: darken($color: rgb(250, 119, 119), $amount: 10);
     }
 }
+
 .btn-block {
     margin-right: 0;
     width: 40%;
     background: $google-blue;
     color: #fff;
+}
+
+.btn-signin {
+    border-radius: 0;
+    width: 35%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               phrases screen                               */
+/* -------------------------------------------------------------------------- */
+
+/* --------------------------------- header --------------------------------- */
+.btn-bars {
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    min-width: 50px;
+    border: none;
+    background: none;
+    transition: all 0.2s;
+    &:hover {
+        background: $light-grey;
+    }
+
+    svg {
+        width: 18px;
+    }
+}
+.btn-search, .btn-close{
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    min-height: 40px;
+    border: none;
+    &:hover{
+        background: $light-grey;
+    }
+}
+.btn-settings{
+    @extend .btn-search;
+    background: none;
+    margin-right: 10px;;
+    i,svg{
+        color: $font-grey;
+    }
+}
+.btn-close-msg{
+    cursor: pointer;
+    border: none;
 }

@@ -1,11 +1,33 @@
-.notes__main-content {
+.msgs__main-content {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    height: 100%;
+    padding: 50px;
+    width: 100%;
+}
+.msgs_create-msg, .msgs_create-msg-complete{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px;
+    padding: 12px;
+    width: 80%;
+    min-width: 500px;
+    p{
+        margin: 0;
+    }
+}
+.msgs_create-msg-complete{
+    padding-top: 20px;
+}
+.msgs__msg-options{
+    padding-top: 10px;
+    border-top: 1px solid $light-grey;
+}
+.msgs__title{
+    border: none;
+    outline:none;
 }
 
-
-.notes__appbar {
+.msgs__appbar {
     align-items: center;
     background-color: $primary;
     color: white;
@@ -15,7 +37,7 @@
 }
 
 
-.notes__content {
+.msgs__content {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -23,7 +45,7 @@
 }
 
 
-.notes__title-input, .notes__textarea {
+.msgs__title-input, .msgs__textarea {
     border: none;
 
     &:focus{
@@ -31,14 +53,14 @@
     }
 }
 
-.notes__title-input {
+.msgs__title-input {
     color: $dark-grey;
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
-.notes__textarea {
+.msgs__textarea {
     border: none;
     color: $dark-grey;
     font-size: 20px;
@@ -46,7 +68,7 @@
     resize: none;
 }
 
-.notes__image img {
+.msgs__image img {
     box-shadow: 5px 5px $dark-grey;
     height: 150px;
 }

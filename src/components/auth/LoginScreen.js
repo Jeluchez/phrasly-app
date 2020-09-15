@@ -22,19 +22,19 @@ export const LoginScreen = () => {
                         <span>sing with google</span>
                     </button>
                     <button className="btn btn-facebook">
-                        <img className="facebook-icon" src="https://cdn.worldvectorlogo.com/logos/facebook-2.svg" />
+                        <img className="facebook-icon" src="https://cdn.worldvectorlogo.com/logos/facebook-2.svg" alt="facebook button" />
                         <span>sing with facebook</span>
                     </button>
                 </div>
                 <p className="text-center">or</p>
-                <div className="auth_form-login">
+                <div className="auth__form-login">
                     <div className="d-flex justify-content-between align-items-center auth__input-containter">
                         <input type="text" placeholder="email" name="email" className="auth__input w-100" autoComplete="off"
                         />
                         <i className="fas fa-at"></i>
                     </div>
                     <div className="d-flex justify-content-between align-items-center  auth__input-containter">
-                        <input type="password" placeholder="password" name="password" className="auth__input w-100" />
+                        <input type="password" placeholder="password" name="password" autocomplete="new-password" className="auth__input w-100" />
                         <i class="fas fa-key"></i>
                     </div>
                     <div className="auth__log-for-container d-flex justify-content-between">
