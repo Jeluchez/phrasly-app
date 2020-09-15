@@ -19,29 +19,18 @@
     padding-top: 20px;
 }
 .msgs__msg-options{
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
     padding-top: 10px;
     border-top: 1px solid $light-grey;
+}
+.msgs__msg-options{
+
 }
 .msgs__title{
     border: none;
     outline:none;
-}
-
-.msgs__appbar {
-    align-items: center;
-    background-color: $primary;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px 10px 20px;
-}
-
-
-.msgs__content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 20px;
 }
 
 
@@ -52,7 +41,9 @@
         outline: none;
     }
 }
-
+.msgs__textarea{
+    margin-top: 15px;
+}
 .msgs__title-input {
     color: $dark-grey;
     font-size: 25px;

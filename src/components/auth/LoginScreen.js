@@ -35,7 +35,7 @@ export const LoginScreen = () => {
                     </div>
                     <div className="d-flex justify-content-between align-items-center  auth__input-containter">
                         <input type="password" placeholder="password" name="password" autocomplete="new-password" className="auth__input w-100" />
-                        <i class="fas fa-key"></i>
+                        <i className="fas fa-key"></i>
                     </div>
                     <div className="auth__log-for-container d-flex justify-content-between">
                         <button type="submit" className="btn btn-block">Login</button>

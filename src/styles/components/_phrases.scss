@@ -116,13 +116,35 @@
 /* -------------------------------------------------------------------------- */
 /*                                main phrases                                */
 /* -------------------------------------------------------------------------- */
-.phrases__main{
+.phrases__main {
     display: flex;
     flex-direction: column;
     width: calc(100vw - 280px);
     height: calc(100vh - 60px);
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: lighten($dark-grey, 20%);
+        border-radius: 3px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: $dark-grey;
+    }
 }
+
 .phrases__entries {
     // margin: 0 20px;
     width: 100%;
@@ -135,7 +157,8 @@
 .phrases__entry {
     border: 1px solid $light-grey;
     transition: all .3s;
-    &:hover{
+
+    &:hover {
         box-shadow: 0px 0px 5px lighten($dark-grey, 10%);
     }
 }
@@ -155,35 +178,43 @@
 .phrases__entry-content {
     font-size: 14px;
 }
+
 .phrases__niether {
     padding-bottom: 70px;
 }
-.phrases__niether h4{
+
+.phrases__niether h4 {
     color: $light-grey;
 }
-.phrases__icon-phrase{
+
+.phrases__icon-phrase {
     path {
         fill: $light-grey;
     }
+
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
 }
-.phrases__options{
+
+.phrases__options {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    button{
+
+    button {
         min-width: 30px;
         height: 30px;
         border: none;
         margin-left: 5px;
     }
-    svg{
+
+    svg {
         width: 15px;
         margin: 0;
     }
-    path{
+
+    path {
         fill: $font-grey;
     }
 }

@@ -1,6 +1,7 @@
 .btn-primary {
     background-color: $primary;
     border-radius: 2px;
+    border: none;
 
     &:disabled {
         background-color: lighten($color: $primary, $amount: 15);
@@ -10,7 +11,7 @@
         background-color: darken($color: $primary, $amount: 15);
     }
 }
-
+btn-default
 .btn-danger {
     background-color: rgb(250, 119, 119);
     transition: background-color .3s ease;
@@ -43,8 +44,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    min-width: 50px;
+    height: 40px;
+    min-width: 40px;
     border: none;
     background: none;
     transition: all 0.2s;
@@ -62,11 +63,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 40px;
-    min-height: 40px;
+    width: 40px;
+    height: 40px;
     border: none;
+    background: none;
+    padding: 0;
     &:hover{
         background: $light-grey;
+    }
+    i,svg{
+        font-size: 20px;
     }
 }
 .btn-settings{
@@ -75,9 +81,17 @@
     margin-right: 10px;;
     i,svg{
         color: $font-grey;
+        font-size: 20px;
     }
 }
 .btn-close-msg{
     cursor: pointer;
     border: none;
+    margin-left: auto;
+}
+.btn-galery{
+    @extend .btn-bars;
+    min-width: 30px;
+        height: 30px;
+    margin-right: 10px;
 }
