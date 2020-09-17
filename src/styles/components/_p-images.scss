@@ -42,7 +42,7 @@
 
     &::-webkit-scrollbar {
         width: 7px;
-       
+
     }
 
     /* Track */
@@ -62,6 +62,8 @@
     }
 }
 
+
+
 .p-images__footer {
     height: 60px;
     border-bottom: 1px solid $light-grey;
@@ -69,5 +71,31 @@
 
     button {
         width: 120px;
+    }
+}
+
+// medias cueri
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 3;
+        column-gap: 0.3rem;
+    }
+
+    .card {
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 4;
+        column-gap: 0.3rem;
+    }
+}
+
+@media (min-width: 960px) {
+    .card-columns {
+        column-count: 5;
+        column-gap: 0.3rem;
     }
 }
