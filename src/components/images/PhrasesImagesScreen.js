@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import { useHistory } from 'react-router-dom';
+
 import { useForm } from '../../hooks/useForm';
 
 import { ImagesGrid } from './ImagesGrid';
@@ -9,26 +10,18 @@ export const PhrasesImagesScreen = () => {
     let history = useHistory();
 
     const [formValues, handleInputChange, reset] = useForm({
-        search:''
+        search: ''
     });
-
-    useEffect(() => {
-        // searching by default
-        setSearching('more');
-    }, [])
-    const {search} = formValues;
-
-    const [getSearching , setSearching] = useState('');
+    const { search } = formValues;
+    const [getSearching, setSearching] = useState('more');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (search.trim().length > 2) {
-           
-             //execute the searching 
-             setSearching(search);
-             reset();
+            //execute the searching 
+            setSearching(search);
+            reset();
         }
-     
     }
     const handleClose = () => {
         history.replace("/");
@@ -47,15 +40,15 @@ export const PhrasesImagesScreen = () => {
                         <i className="fas fa-search mx-2"></i>
                         <form onSubmit={handleSubmit}>
                             <input type="text" placeholder="search photos" name="search" className="p-images__input-image-searcher auth__input"
-                            value={search}
-                            onChange={handleInputChange}
+                                value={search}
+                                onChange={handleInputChange}
                             />
                         </form>
                     </div>
                 </div>
-                <div className="p-images__content">
-                    <ImagesGrid getSearching={getSearching} />
-                </div>
+
+              {getSearching && <ImagesGrid getSearching={getSearching} />}  
+
             </div>
             <div className="d-flex justify-content-center align-items-center p-images__footer">
                 <button className="btn btn-primary mx-2">Add image</button>

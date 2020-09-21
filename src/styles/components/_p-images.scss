@@ -62,8 +62,36 @@
     }
 }
 
+.masonry-grid {
+    display: flex;
+    width: auto;
+}
 
+.masonry-grid_column {
+    padding: 3px;
+    background-clip: padding-box;
 
+    > div {
+        margin: 5px auto;
+        margin-bottom: 0;
+    }
+    img{
+        max-width: 100%;
+    }
+}
+
+// .p-images__grid{
+//     display: grid;
+//     grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+//     gap: 0.5rem;
+//     grid-auto-rows: 130px;
+//     div{
+//         min-height: 150px;
+//     }
+//     img{
+//         max-width: 100%;
+//     }
+// }
 .p-images__footer {
     height: 60px;
     border-bottom: 1px solid $light-grey;
@@ -74,15 +102,26 @@
     }
 }
 
+.card-columns {
+    .card {
+        margin: 0 auto;
+        margin-bottom: 3px;
+        border: none;
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+
 // medias cueri
 @media (min-width: 576px) {
     .card-columns {
         column-count: 3;
-        column-gap: 0.3rem;
     }
 
     .card {
-        margin: 0 auto;
+        margin: 0px auto;
     }
 }
 

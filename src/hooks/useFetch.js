@@ -6,7 +6,7 @@ export const useFetch = (url) => {
 
     const [state, setState] = useState({
         data: null,
-        loading: true,
+        loading: false,
         error: null
     });
 
