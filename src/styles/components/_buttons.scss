@@ -95,3 +95,6 @@ btn-default
         height: 30px;
     margin-right: 10px;
 }
+.btn-add-category:disabled{
+    background-color:  lighten($color: $primary, $amount: 15);
+}

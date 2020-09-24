@@ -1,9 +1,5 @@
 import { types } from '../types/types'
 
-// export const selectImage = (id, urls, desc) => {
-
-//     console.log(urls);
-// }
 export const selectImage = (id, urls, desc) => ({
     type: types.selectImage,
     payload: {
@@ -12,14 +8,14 @@ export const selectImage = (id, urls, desc) => ({
         desc
     }
 });
-export const loadImages = (images) => {
-    return {
-        type: types.loadImages,
-        payload: [...images]
-    };
-}
-export const cleanImages = () => {
-    return {
-        type: types.cleanImages
-    };
-}
+export const deselectImage = () => ({
+    type: types.deselectImage
+});
+export const loadImages = (images) => ({
+    type: types.loadImages,
+    payload: [...images]
+})
+export const cleanImages = () => ({
+    type: types.cleanImages
+
+})

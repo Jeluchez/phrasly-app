@@ -14,6 +14,11 @@ export const imagesReducers = (state = initialState, action) => {
                     ...action.payload
                 }
             }
+        case types.deselectImage:
+            return {
+                ...state,
+                selected: null
+            }
         case types.loadImages:
             return {
                 ...state,

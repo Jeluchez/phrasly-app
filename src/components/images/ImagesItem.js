@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { selectImage } from '../../actions/imagesFromApi';
+import { deselectImage, selectImage } from '../../actions/imagesFromApi';
 
 let prevImageBox = null;
 export const ImagesItem = ({ id, urls, desc }) => {
@@ -22,10 +22,8 @@ export const ImagesItem = ({ id, urls, desc }) => {
         let curImageBox = currentTarget;
         let curChecked = curImageBox.querySelector('.image-checked');
         let prevChecked = null;
+        let SelectedImage = false;
         // select image and add to state
-        dispatch(selectImage(id, urls, desc));
-
-
 
         // delete or add check icon from imagebox current
         if (prevImageBox) {
@@ -33,13 +31,21 @@ export const ImagesItem = ({ id, urls, desc }) => {
             // this variable allow me to decide, if the current imagebox has been uncheck.
             const isSomeSelecting = curChecked.classList.toggle('d-none');
             prevChecked.classList.add('d-none');
-            // if the imageBox hasbeen remove, then prevImageBox = null
+            // if the imageBox check hasbeen remove, then prevImageBox = null
             prevImageBox = isSomeSelecting ? null : curImageBox;
+            // if there is a selected image, so indicate
+            SelectedImage = !isSomeSelecting && true;
         }
         else {
-            curChecked.classList.toggle('d-none');
+            const isSomeSelecting = curChecked.classList.toggle('d-none');
             prevImageBox = curImageBox;
+            // if there is a selected image, so indicate with true, else, with false. if u want to check this print the isSomeSelecting variable
+            SelectedImage = !isSomeSelecting && true;
         }
+
+        // if there is a selected image, then save to state
+        SelectedImage ? dispatch(selectImage(id, urls, desc)) : dispatch(deselectImage())
+
     }
 
     return (

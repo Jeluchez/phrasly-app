@@ -1,5 +1,5 @@
-import React, {useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { cleanImages } from '../../actions/imagesFromApi';
 
@@ -11,6 +11,7 @@ export const PhrasesImagesScreen = () => {
 
     let history = useHistory();
     const dispatch = useDispatch();
+    const { selected: selectedImage } = useSelector(state => state.images);
 
     const [formValues, handleInputChange, reset] = useForm({
         search: ''
@@ -21,7 +22,7 @@ export const PhrasesImagesScreen = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (search.trim().length > 2) {
-             // clean images 
+            // clean images 
             dispatch(cleanImages())
             //execute the searching 
             setSearching(search);
@@ -56,12 +57,13 @@ export const PhrasesImagesScreen = () => {
                     </div>
                 </div>
 
-              {getSearching && <ImagesGrid getSearching={getSearching} />}  
+                {getSearching && <ImagesGrid getSearching={getSearching} />}
 
             </div>
             <div className="d-flex justify-content-center align-items-center p-images__footer">
-                <button className="btn btn-primary mx-2" onClick={handleAddImage}>Add image</button>
-                <button className="btn btn-default btn-cancel mx-2" onClick={handleClose} >Cancel</button>
+                <button className="btn btn-primary mx-2 btn-add-category" onClick={handleAddImage} disabled={!(selectedImage || false)} >Add image</button>
+                <button className="btn btn-default btn-cancel mx-2" onClick={handleClose}>Cancel</button>
+                <span>{}</span>
             </div>
         </div>
     )
