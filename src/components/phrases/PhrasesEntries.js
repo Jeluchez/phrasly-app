@@ -10,7 +10,7 @@ export const PhrasesEntries = () => {
         <div className="phrases__entries">
             {
                 entries.map(note => (
-                    <PhrasesEntry />
+                    <PhrasesEntry key={note} />
                 ))
             }
         </div>

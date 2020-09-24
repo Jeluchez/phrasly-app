@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Masonry from 'react-masonry-css'
-import InfiniteScroll from 'react-infinite-scroll-component';
 
-// import { useFetchImages } from './useFetchImages';
-import { Loader } from './Loader';
 import { ImagesItem } from './ImagesItem';
 import { getPhotos } from '../APIs/unplashAPI';
+import { loadImages } from '../../actions/imagesFromApi';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const ImagesGrid = ({ getSearching }) => {
 
-    console.log(getSearching);
-    const [images, setImages] = useState([]);
+    const dispatch = useDispatch();
+    const { images } = useSelector(state => state.images);
     // variable to search the photos by page
     const [page, setpage] = useState(1);
     // flag indicate when images load
@@ -23,23 +22,23 @@ export const ImagesGrid = ({ getSearching }) => {
             getPhotos(getSearching, page)
                 .then(newImages => {
                     setTimeout(() => {
-                        setImages(prev => [...prev, ...newImages]);
-                        // console.log(newImages);
+                        // this is a function the ACTIONS, to store it  in the store
+                        dispatch(loadImages(newImages));
                         setloading(false);
                     }, 300);
                 });
         }
         loadPhotos();
-    }, [getSearching, page])
+    }, [getSearching, page, dispatch])
 
     const handleScroll = (e) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
         const scrollIndicate = Math.trunc(scrollHeight - scrollTop);
-        // console.log("clientHeight: ", clientHeight);
-        // console.log("in bottom: ", scrollIndicate);
-        if (scrollIndicate <= clientHeight) {
+        
+        if (scrollIndicate <= (clientHeight+50)) {
+            console.log(clientHeight);
             setpage(page + 1);
-            // console.log("inBottom");
+            // console.log(images);
         }
     }
     const breakpointColumnsObj = {
@@ -63,14 +62,18 @@ export const ImagesGrid = ({ getSearching }) => {
                         columnClassName="masonry-grid_column"
                     >
                         {
-
+                            
                             images && images.map(image => <ImagesItem key={image.id} {...image} />)
 
                         }
                     </Masonry>
                 </div>
             }
-            { loading && <Loader />}
+            { loading &&
+                (<div className="w-100% d-flex justify-content-center">
+                    <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                </div>)
+            }
         </div>
     )
 }

@@ -1,5 +1,7 @@
 import React, {useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { cleanImages } from '../../actions/imagesFromApi';
 
 import { useForm } from '../../hooks/useForm';
 
@@ -8,6 +10,7 @@ import { ImagesGrid } from './ImagesGrid';
 export const PhrasesImagesScreen = () => {
 
     let history = useHistory();
+    const dispatch = useDispatch();
 
     const [formValues, handleInputChange, reset] = useForm({
         search: ''
@@ -18,12 +21,18 @@ export const PhrasesImagesScreen = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (search.trim().length > 2) {
+             // clean images 
+            dispatch(cleanImages())
             //execute the searching 
             setSearching(search);
             reset();
         }
     }
+    const handleAddImage = () => {
+        history.replace("/");
+    }
     const handleClose = () => {
+        dispatch(cleanImages())
         history.replace("/");
     }
     return (
@@ -51,7 +60,7 @@ export const PhrasesImagesScreen = () => {
 
             </div>
             <div className="d-flex justify-content-center align-items-center p-images__footer">
-                <button className="btn btn-primary mx-2">Add image</button>
+                <button className="btn btn-primary mx-2" onClick={handleAddImage}>Add image</button>
                 <button className="btn btn-default btn-cancel mx-2" onClick={handleClose} >Cancel</button>
             </div>
         </div>

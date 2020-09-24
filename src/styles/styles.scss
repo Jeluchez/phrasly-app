@@ -1,6 +1,11 @@
 
 @import './base/settings';
 @import './base/base';
+@import './base/mixins.scss';
+
+// hepers
+@import './helpers/loading';
+@import './helpers/scroll-bar';
 
 // Components
 @import './components/auth';
@@ -11,5 +16,3 @@
 @import './components/msgs';
 @import './components/p-images';
 
-// hepers
-@import './helpers/loading';

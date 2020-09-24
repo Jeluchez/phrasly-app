@@ -48,7 +48,7 @@ export const RegisterScreen = () => {
                     </div>
                     <div className="auth__term-conditions mt-3">
                         <input type="checkbox"/>
-                        <a href="#" className="small">Term of services, privacity and Policy</a>
+                        <a href="/#" className="small">Term of services, privacity and Policy</a>
                     </div>
                     <div className="auth__sign-for-container mt-4 d-flex justify-content-between">
                         <button type="submit" className="btn btn-block btn-signin">Sign In</button>

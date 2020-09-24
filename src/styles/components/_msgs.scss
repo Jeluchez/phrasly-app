@@ -6,44 +6,55 @@
     padding: 50px;
     width: 100%;
 }
-.msgs_create-msg, .msgs_create-msg-complete{
+
+.msgs_create-msg,
+.msgs_create-msg-complete {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px;
-    padding: 12px;
     width: 80%;
     min-width: 500px;
-    p{
+}
+
+.msgs_create-msg {
+    cursor: text;
+    p {
+        padding: rem(10);
         margin: 0;
     }
 }
-.msgs_create-msg-complete{
-    padding-top: 20px;
+
+.msgs__form {
+    margin: rem(10);
 }
-.msgs__msg-options{
+
+.msgs__msg-options {
     display: flex;
     text-align: center;
     justify-content: flex-end;
-    padding-top: 10px;
+    padding: rem(10);
     border-top: 1px solid $light-grey;
 }
-.msgs__msg-options{
 
-}
-.msgs__title{
+.msgs__msg-options {}
+
+.msgs__title {
     border: none;
-    outline:none;
+    outline: none;
 }
 
 
-.msgs__title-input, .msgs__textarea {
+.msgs__title-input,
+.msgs__textarea {
     border: none;
 
-    &:focus{
+    &:focus {
         outline: none;
     }
 }
-.msgs__textarea{
+
+.msgs__textarea {
     margin-top: 15px;
 }
+
 .msgs__title-input {
     color: $dark-grey;
     font-size: 25px;
@@ -59,7 +70,13 @@
     resize: none;
 }
 
-.msgs__image img {
-    box-shadow: 5px 5px $dark-grey;
-    height: 150px;
+.msgs__picture {
+    height: 300px;
+    overflow: auto;
+    margin: 0;
+
+    img {
+        max-width: 100%;
+        // max-height: 100%;
+    }
 }
