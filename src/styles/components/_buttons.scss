@@ -11,7 +11,14 @@
         background-color: darken($color: $primary, $amount: 15);
     }
 }
-btn-default
+.btn-google {
+    background: #5969F9;
+
+    span {
+        color: white;
+    }
+}
+.btn-default
 .btn-danger {
     background-color: rgb(250, 119, 119);
     transition: background-color .3s ease;

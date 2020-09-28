@@ -16,7 +16,6 @@ export const MessageScreen = () => {
             setToggle(true);
             handleShowHiden();
         } 
-        
     }, [selectedImage]);
 
 
@@ -51,7 +50,7 @@ export const MessageScreen = () => {
             <div className="msgs_create-msg-complete d-none">
                 {selectedImage &&
                     <div className="msgs__picture">
-                        <img src={selectedImage.urls.regular} alt={selectedImage.desc} />
+                        <img src={selectedImage?.urls?.regular} alt={selectedImage.desc} />
                     </div>
                 }
                 <form className="msgs__form d-flex flex-column">

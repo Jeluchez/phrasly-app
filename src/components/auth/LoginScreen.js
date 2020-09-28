@@ -1,8 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
+import validator from 'validator';
+
+import { useForm } from '../../hooks/useForm';
+
+
 export const LoginScreen = () => {
 
+    const dispatch = useDispatch();
 
+    const [formValues, handleInputChange] = useForm({
+        email: "",
+        password: ''
+    });
+    const [msg, setMsg] = useState({
+        emailMsg: '',
+        passwordMsg: ''
+    })
+
+    let { emailMsg, passwordMsg } = msg;
+    const { email, password } = formValues;
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (isFormValid()) {
+            dispatch(startLoginEmailPassword(email, password));
+        }
+
+    }
+    const handleGoogleLogin = () => {
+        dispatch(startGoogleLogin());
+    }
+    const isFormValid = () => {
+
+        emailMsg = '';
+        passwordMsg = '';
+
+        let valid = true;
+
+        if (!validator.isEmail(email)) {
+            emailMsg = 'Invalid Email'
+            valid = false;
+        }
+        if (email.trim().length === 0) {
+            emailMsg = 'Email is required'
+            valid = false;
+        }
+        if (password.length < 5) {
+            passwordMsg = 'password should be at least 6 characters'
+            valid = false;
+        }
+        setMsg({
+            ...msg,
+            emailMsg,
+            passwordMsg
+        });
+        return valid;
+    }
     return (
         <>
             <div className="auth__phrase-container">
@@ -14,10 +70,10 @@ export const LoginScreen = () => {
 
                 </div>
             </div>
-            <form className="auth__form">
+            <form onSubmit={handleLogin} className="auth__form">
                 <h3 className="auth__title pt-5 pb-3 text-center">Log In</h3>
                 <div className="auth__social-nets">
-                    <button className="btn btn-google">
+                    <button className="btn btn-google" onClick={handleGoogleLogin}>
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                         <span>sing with google</span>
                     </button>
@@ -28,17 +84,27 @@ export const LoginScreen = () => {
                 </div>
                 <p className="text-center">or</p>
                 <div className="auth__form-login">
-                    <div className="d-flex justify-content-between align-items-center auth__input-containter">
+                    <div className={`d-flex justify-content-between align-items-center auth__input-containter ${emailMsg && 'is-invalid'}`}>
                         <input type="text" placeholder="email" name="email" className="auth__input w-100" autoComplete="off"
+                            value={email}
+                            onChange={handleInputChange}
                         />
                         <i className="fas fa-at"></i>
+                        <span className="auth__validator-msg">{emailMsg}</span>
                     </div>
-                    <div className="d-flex justify-content-between align-items-center  auth__input-containter">
-                        <input type="password" placeholder="password" name="password" autocomplete="new-password" className="auth__input w-100" />
+                    <div className={`d-flex justify-content-between align-items-center auth__input-containter ${passwordMsg && 'is-invalid'}`}>
+                        <input type="password" placeholder="password" name="password" autoComplete="off" className="auth__input w-100"
+                            value={password}
+                            onChange={handleInputChange}
+                        />
                         <i className="fas fa-key"></i>
+                        <span className="auth__validator-msg">{passwordMsg}</span>
                     </div>
                     <div className="auth__log-for-container d-flex justify-content-between">
-                        <button type="submit" className="btn btn-block">Login</button>
+                        <button type="submit" className="btn btn-block"
+                        >
+                            Login
+                        </button>
                         <div><Link to="/auth/register" >Forgot the password</Link></div>
                     </div>
                     <p className="auth__create-acount">No account? <Link to="/auth/register">Create one</Link></p>

@@ -11,5 +11,6 @@ export const types = {
     deselectImage: '[ImagesFromApi] Deselect image',
     loadSelectedImage: '[ImagesFromApi] Load selected image ',
     updateImage: '[ImagesFromApi] Update image',
-    cleanImages: '[ImagesFromApi] Clean images'
+    cleanImages: '[ImagesFromApi] Clean images',
+    cleanAll: '[ImagesFromApi] Clean images and selected image '
 }

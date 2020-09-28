@@ -17,5 +17,7 @@ export const loadImages = (images) => ({
 })
 export const cleanImages = () => ({
     type: types.cleanImages
-
+})
+export const cleanAll = () => ({
+    type: types.cleanAll
 })

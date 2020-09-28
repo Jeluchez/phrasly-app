@@ -27,6 +27,11 @@ export const imagesReducers = (state = initialState, action) => {
 
         case types.cleanImages:
             return {
+                ...state,
+                images: []
+            }
+        case types.cleanAll:
+            return {
                 images: [],
                 selected: null
             }

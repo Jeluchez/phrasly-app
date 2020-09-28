@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { cleanImages } from '../../actions/imagesFromApi';
+import { cleanAll, cleanImages } from '../../actions/imagesFromApi';
 
 import { useForm } from '../../hooks/useForm';
 
@@ -33,9 +33,13 @@ export const PhrasesImagesScreen = () => {
         history.replace("/");
     }
     const handleClose = () => {
-        dispatch(cleanImages())
         history.replace("/");
     }
+    const handleCancel = () => {
+        dispatch(cleanAll());
+        history.replace("/");
+    }
+
     return (
         <div className="p-images__main-content d-flex flex-column">
             <div className="d-flex justify-content-between align-items-center p-images__header">
@@ -62,7 +66,7 @@ export const PhrasesImagesScreen = () => {
             </div>
             <div className="d-flex justify-content-center align-items-center p-images__footer">
                 <button className="btn btn-primary mx-2 btn-add-category" onClick={handleAddImage} disabled={!(selectedImage || false)} >Add image</button>
-                <button className="btn btn-default btn-cancel mx-2" onClick={handleClose}>Cancel</button>
+                <button className="btn btn-default btn-cancel mx-2" onClick={handleCancel}>Cancel</button>
                 <span>{}</span>
             </div>
         </div>

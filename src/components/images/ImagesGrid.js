@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Masonry from 'react-masonry-css'
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ImagesItem } from './ImagesItem';
-import { getPhotos } from '../APIs/unplashAPI';
 import { loadImages } from '../../actions/imagesFromApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { getPhotos } from '../../APIs/unplashAPI';
 
 export const ImagesGrid = ({ getSearching }) => {
 

@@ -5,8 +5,6 @@ import { deselectImage, selectImage } from '../../actions/imagesFromApi';
 let prevImageBox = null;
 export const ImagesItem = ({ id, urls, desc }) => {
 
-
-
     const dispatch = useDispatch();
     const { thumb } = urls;
 
@@ -23,7 +21,7 @@ export const ImagesItem = ({ id, urls, desc }) => {
         let curChecked = curImageBox.querySelector('.image-checked');
         let prevChecked = null;
         let SelectedImage = false;
-        // select image and add to state
+    
 
         // delete or add check icon from imagebox current
         if (prevImageBox) {
@@ -43,7 +41,7 @@ export const ImagesItem = ({ id, urls, desc }) => {
             SelectedImage = !isSomeSelecting && true;
         }
 
-        // if there is a selected image, then save to state
+        // if there is a selected image, then save to state, else remove it from the state
         SelectedImage ? dispatch(selectImage(id, urls, desc)) : dispatch(deselectImage())
 
     }

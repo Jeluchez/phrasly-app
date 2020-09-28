@@ -16,8 +16,9 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Switch>
-                    <Route path="/auth" component={AuthRouter}/>
-                    <Route exact path="/" component={PhrasesScreen}/>
+                    <Route path="/" component={AuthRouter}/>
+                    {/* <Route path="/auth" component={AuthRouter}/> */}
+                    {/* <Route exact path="/" component={PhrasesScreen}/> */}
                     <Route exact path="/home/photo" component={PhrasesImagesScreen}/>
                     <Redirect to="/auth/login" />
                 </Switch>
