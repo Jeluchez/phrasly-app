@@ -29,15 +29,11 @@
 }
 
 .btn-block {
+    border-radius: 0;
     margin-right: 0;
-    width: 40%;
+    width: 35%;
     background: $google-blue;
     color: #fff;
-}
-
-.btn-signin {
-    border-radius: 0;
-    width: 35%;
 }
 
 /* -------------------------------------------------------------------------- */

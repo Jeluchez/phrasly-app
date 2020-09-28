@@ -1,7 +1,7 @@
-
+// name: '[responsible for the action] action'
 
 export const types = {
-    // name: '[responsible for the action] action'
+    
     login: '[Auth] Login',
     logout: '[Auth] Logout',
 
@@ -12,5 +12,8 @@ export const types = {
     loadSelectedImage: '[ImagesFromApi] Load selected image ',
     updateImage: '[ImagesFromApi] Update image',
     cleanImages: '[ImagesFromApi] Clean images',
-    cleanAll: '[ImagesFromApi] Clean images and selected image '
+    cleanAll: '[ImagesFromApi] Clean images and selected image ',
+    // ui
+    uiStartLoading: '[Ui] start loading',
+    uiFinishLoading: '[Ui] finish loading',
 }

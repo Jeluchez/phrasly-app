@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 import validator from 'validator';
@@ -10,7 +10,9 @@ import { useForm } from '../../hooks/useForm';
 export const LoginScreen = () => {
 
     const dispatch = useDispatch();
-
+    // get the loading, that is that flag to know that user login or not login
+    const { loading } = useSelector(state => state.ui);
+    
     const [formValues, handleInputChange] = useForm({
         email: "",
         password: ''
@@ -101,7 +103,7 @@ export const LoginScreen = () => {
                         <span className="auth__validator-msg">{passwordMsg}</span>
                     </div>
                     <div className="auth__log-for-container d-flex justify-content-between">
-                        <button type="submit" className="btn btn-block"
+                        <button type="submit" className="btn btn-block" disabled={loading}
                         >
                             Login
                         </button>

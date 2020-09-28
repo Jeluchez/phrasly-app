@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import validator from 'validator';
 
@@ -12,6 +12,9 @@ export const RegisterScreen = () => {
 
     // funcionan ejecutadora similar al setState
     const dispatch = useDispatch();
+    // get the loading, that is that flag to know that user login or not login
+    const { loading } = useSelector(state => state.ui);
+    
     const [formValues, handleInputChange] = useForm({
         name: '',
         email: '',
@@ -132,7 +135,7 @@ export const RegisterScreen = () => {
 
                     </div>
                     <div className="auth__sign-for-container mt-4 d-flex justify-content-between">
-                        <button type="submit" className="btn btn-block btn-signin">Sign Up</button>
+                        <button type="submit" className="btn btn-block"  disabled={loading}>Sign Up</button>
                         <div className="small d-flex align-items-end">Already have an account? <Link to="/auth/login" className="pl-1">Sign In</Link></div>
                     </div>
 
