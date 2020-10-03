@@ -65,14 +65,31 @@
     align-items: center;
     justify-content: flex-end;
     margin-left: auto;
-    flex: content-box;
     height: 50px;
 
     img {
+        cursor: pointer;
         border-radius: 50%;
         border: 1px solid $light-grey;
-        height: 35px;
+        width: rem(35);
+        height: rem(35)
     }
+}
+
+.phrases__account {
+    position: relative;
+}
+
+.menu-account {
+    background-color: #fff;
+    height: rem(200);
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: rem(50);
+    width: rem(300);
+    border: 1px solid $light-grey;
+    box-shadow: -1px 0px 10px $light-grey;
 }
 
 .phrases__sidebar {

@@ -1,7 +1,35 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogout } from '../../actions/auth';
 
 import phraslyLogo from '../../images/phrasly.png'
 export const Header = () => {
+
+    const { name } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+
+    let accountMenu = null;
+    let accountMenuState = true;
+
+    const handleLogout = () => {
+        dispatch(startLogout());
+    }
+    // hidden account menu, when click in other place
+    document.body.addEventListener('click', (e) => {
+        const ele = e.target;
+        if (ele.classList.contains('btn-account')) {
+            accountMenu = document.querySelector('.menu-account');
+            accountMenuState = accountMenu.classList.toggle('d-none');
+        } else {
+
+            const menuaccountChilds = ele.closest('.menu-account');
+            // if the menu is show and click in a div diferent to menu-account and its childs, then hide menu-account
+            if (!accountMenuState && !menuaccountChilds) {
+                accountMenuState = accountMenu.classList.toggle('d-none');
+            }
+        }
+
+    })
     return (
         <header className="phrases__header">
             <div className="btn-bars">
@@ -20,7 +48,13 @@ export const Header = () => {
             </div>
             <div className="phrases__profile">
                 <button className="btn-settings"><i className="fas fa-cog"></i></button>
-                <img src={require('../../images/user_default.png')} alt="user default"/>
+                <div id="phrases__account" className="phrases__account">
+                    <img src={require('../../images/user_default.png')} className="btn-account" alt="user default" />
+                    <div className="menu-account  d-none">
+                        <div>{name}</div>
+                        <a href="/#" onClick={handleLogout}>Logout</a>
+                    </div>
+                </div>
             </div>
         </header>
     )
