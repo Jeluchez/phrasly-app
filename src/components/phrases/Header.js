@@ -1,13 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth';
-
 import phraslyLogo from '../../images/phrasly.png'
+
 export const Header = () => {
 
     const { name } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
+    
     let accountMenu = null;
     let accountMenuState = true;
 
@@ -15,9 +16,10 @@ export const Header = () => {
         dispatch(startLogout());
     }
     // hidden account menu, when click in other place
-    document.body.addEventListener('click', (e) => {
+    window.addEventListener('click', (e) => {
         const ele = e.target;
         if (ele.classList.contains('btn-account')) {
+            console.log('click');
             accountMenu = document.querySelector('.menu-account');
             accountMenuState = accountMenu.classList.toggle('d-none');
         } else {
@@ -25,6 +27,7 @@ export const Header = () => {
             const menuaccountChilds = ele.closest('.menu-account');
             // if the menu is show and click in a div diferent to menu-account and its childs, then hide menu-account
             if (!accountMenuState && !menuaccountChilds) {
+                console.log('hide');
                 accountMenuState = accountMenu.classList.toggle('d-none');
             }
         }

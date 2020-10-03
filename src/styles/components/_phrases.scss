@@ -90,6 +90,7 @@
     width: rem(300);
     border: 1px solid $light-grey;
     box-shadow: -1px 0px 10px $light-grey;
+    z-index: 5;
 }
 
 .phrases__sidebar {

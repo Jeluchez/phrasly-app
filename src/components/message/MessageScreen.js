@@ -3,48 +3,59 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { cleanImages } from '../../actions/imagesFromApi';
 
+let createMsgComplete, createMsg = null;
+let createMsgCompleteState = true;
+
 export const MessageScreen = () => {
 
     let history = useHistory();
     const dispatch = useDispatch();
     const { selected: selectedImage } = useSelector(state => state.images);
-    const [toggle, setToggle] = useState(false);
+
+
 
     useEffect(() => {
         // activate div msgs_create-msg-complete if the image is selected
-        if(selectedImage){
-            setToggle(true);
-            handleShowHiden();
-        } 
+        if (selectedImage) {
+            window.removeEventListener('click', handleShowHideMsg);
+            const msgDiv = document.querySelector('.msgs_create-msg');
+            handleShowHideMsg(msgDiv);
+        } else {
+            window.addEventListener('click', (e) => {
+                const ele = e.target;
+                handleShowHideMsg(ele);
+            });
+        }
+        return () => {
+            // Limpiar la suscripción
+            console.log('remove listener');
+            window.removeEventListener('click', handleShowHideMsg);
+        };
     }, [selectedImage]);
 
-
-    function handleShowHiden () {
-        const divMsgs = document.querySelector('.msgs_create-msg');
-        const divMsgsComplete = document.querySelector('.msgs_create-msg-complete');
-
-        if (!toggle) {
-            divMsgs.classList.toggle('d-none');
-            divMsgsComplete && divMsgsComplete.classList.toggle('d-none', toggle === true);
-            setToggle(true);
-        } else {
-            divMsgsComplete && divMsgsComplete.classList.toggle('d-none');
-            divMsgs.classList.toggle('d-none');
-            setToggle(false);
+    function handleShowHideMsg(ele) {
+        // close box message, when click outside
+        if (!ele.closest('.msgs_create-msg-complete') && !createMsgCompleteState) {
+            createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
+            createMsg.classList.toggle('d-none');
+        }
+        if (ele.closest('.msgs_create-msg') || ele.closest('.btn-close-msg')) {
+            createMsgComplete = document.querySelector('.msgs_create-msg-complete');
+            createMsg = document.querySelector('.msgs_create-msg');
+            createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
+            createMsg.classList.toggle('d-none');
         }
     }
-
     // opent photos window 
     const handleOpenPhotos = () => {
-        console.log('click');
         history.push("/home/photo");
-        // clean estate images
+        // clean the state images
         dispatch(cleanImages());
     }
 
     return (
         <div className="msgs__main-content ">
-            <div className="msgs_create-msg" onClick={handleShowHiden}>
+            <div className="msgs_create-msg">
                 <p>Write your phrase...</p>
             </div>
             <div className="msgs_create-msg-complete d-none">
@@ -70,12 +81,10 @@ export const MessageScreen = () => {
                         <i className="fas fa-archive"></i>
                     </div>
 
-                    <button className="btn-close-msg" onClick={handleShowHiden}>close</button>
+                    <button className="btn-close-msg">close</button>
                 </div>
 
             </div>
-
-            {/*  */}
         </div>
     )
 }

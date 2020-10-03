@@ -32,7 +32,8 @@ export const LoginScreen = () => {
         }
 
     }
-    const handleGoogleLogin = () => {
+    const handleGoogleLogin = (e) => {
+        e.preventDefault();
         dispatch(startGoogleLogin());
     }
     const isFormValid = () => {
