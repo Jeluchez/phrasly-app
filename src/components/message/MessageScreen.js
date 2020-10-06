@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { cleanImages } from '../../actions/imagesFromApi';
@@ -22,13 +22,12 @@ export const MessageScreen = () => {
             handleShowHideMsg(msgDiv);
         } else {
             window.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const ele = e.target;
                 handleShowHideMsg(ele);
             });
         }
         return () => {
-            // Limpiar la suscripción
-            console.log('remove listener');
             window.removeEventListener('click', handleShowHideMsg);
         };
     }, [selectedImage]);
