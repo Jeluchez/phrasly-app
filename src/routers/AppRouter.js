@@ -13,7 +13,6 @@ import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { PhrasesImagesScreen } from '../components/images/PhrasesImagesScreen';
 
-let logstate = true;
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
@@ -26,12 +25,10 @@ export const AppRouter = () => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
-                logstate=true;
                 // Load the notes of the user
 
             } else {
                 setIsLoggedIn(false);
-                logstate=false;
             }
             setChecking(false);
         })

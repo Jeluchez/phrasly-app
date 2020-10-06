@@ -1,38 +1,56 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth';
 import phraslyLogo from '../../images/phrasly.png'
+
+let avoidlistener = false;
 
 export const Header = () => {
 
     const { name } = useSelector(state => state.auth);
     const dispatch = useDispatch();
+    const accountMenu = useRef();
 
-    
-    let accountMenu = null;
-    let accountMenuState = true;
+    const handleToggleAccountMenu = useCallback((e) => {
+        const ele = e.target;
+        let accountMenuState;
+        if (accountMenu.current) {
+            if (ele.classList.contains('btn-account')) {
+                accountMenuState = accountMenu.current.classList.toggle('d-none');
+            } else {
+                const menuaccountChilds = ele.closest('.menu-account');
+                // if the menu is show and click in a div diferent to menu-account and its childs, then hide menu-account
+                if (!menuaccountChilds) {
+                    accountMenuState = accountMenu.current.classList.add('d-none');
+                }
+            }
+        }
+    }, []);
+
+
+
+    useEffect(() => {
+        if (!avoidlistener) {
+            window.addEventListener('click', (e) => {
+                e.stopPropagation();
+                handleToggleAccountMenu(e);
+            });
+        } else {
+            console.log('remove');
+            window.removeEventListener('click', handleToggleAccountMenu);
+            avoidlistener=false;
+        }
+        return () => {
+            avoidlistener = true;
+            window.removeEventListener('click', handleToggleAccountMenu);
+        }
+    }, [handleToggleAccountMenu])
+    // hidden account menu, when click in other place
 
     const handleLogout = () => {
         dispatch(startLogout());
     }
-    // hidden account menu, when click in other place
-    window.addEventListener('click', (e) => {
-        const ele = e.target;
-        if (ele.classList.contains('btn-account')) {
-            console.log('click');
-            accountMenu = document.querySelector('.menu-account');
-            accountMenuState = accountMenu.classList.toggle('d-none');
-        } else {
 
-            const menuaccountChilds = ele.closest('.menu-account');
-            // if the menu is show and click in a div diferent to menu-account and its childs, then hide menu-account
-            if (!accountMenuState && !menuaccountChilds) {
-                console.log('hide');
-                accountMenuState = accountMenu.classList.toggle('d-none');
-            }
-        }
-
-    })
     return (
         <header className="phrases__header">
             <div className="btn-bars">
@@ -53,7 +71,7 @@ export const Header = () => {
                 <button className="btn-settings"><i className="fas fa-cog"></i></button>
                 <div id="phrases__account" className="phrases__account">
                     <img src={require('../../images/user_default.png')} className="btn-account" alt="user default" />
-                    <div className="menu-account  d-none">
+                    <div className="menu-account  d-none" ref={accountMenu}>
                         <div>{name}</div>
                         <a href="/#" onClick={handleLogout}>Logout</a>
                     </div>
