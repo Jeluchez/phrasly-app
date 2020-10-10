@@ -16,4 +16,13 @@ export const types = {
     // ui
     uiStartLoading: '[Ui] start loading',
     uiFinishLoading: '[Ui] finish loading',
+
+     // ImagesFromApi
+     phrasesCreateNew: '[phrases] create phrase',
+     phraseSelect: '[phrases] select phrase',
+     phrasesLoad: '[phrases] loads phrases',
+     phrasesUpdate: '[phrases] update phrase',
+     phrasesDelete: '[phrases] delete phrase',
+     phrasesLogoutcleanAll: '[phrases] clean all phrases',
+     
 }

@@ -12,6 +12,8 @@ import { Checking } from './Checking';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { PhrasesImagesScreen } from '../components/images/PhrasesImagesScreen';
+import { setPhrases, startLoadingPhrases } from '../actions/phrases';
+
 
 export const AppRouter = () => {
 
@@ -20,26 +22,31 @@ export const AppRouter = () => {
     const [checking, setChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user?.uid) {
+                const phraSnap = firebase.database().ref('phrases');
+
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
-                // Load the notes of the user
-
             } else {
                 setIsLoggedIn(false);
             }
+            // setTimeout(() => {
             setChecking(false);
+            // }, 500);
+
         })
-    }, [dispatch, setChecking]);
+    }, [dispatch, setChecking, isLoggedIn]);
 
     if (checking) {
-        return (
-            <Checking/>
-        )
-    }
 
+        return (
+            <Checking />
+        );
+
+    }
     return (
         <Router>
             <div>

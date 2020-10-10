@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 export const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => {
 
+  
     return (
         <Route {...rest}
             component={(props) => {
@@ -10,10 +11,11 @@ export const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => {
                     (isLoggedIn)
                         ? (<Component {...props} />)
                         : (<Redirect to="/auth/login" />)
-                )
-            }
-            }
 
+
+                );
+            }
+            }
         />
     )
 }

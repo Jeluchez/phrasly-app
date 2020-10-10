@@ -25,23 +25,25 @@ export const Header = () => {
                 }
             }
         }
+        return accountMenuState;
     }, []);
 
 
 
     useEffect(() => {
-        if (!avoidlistener) {
+        if (avoidlistener) {
+            console.log('remove');
+            window.removeEventListener('click', handleToggleAccountMenu);
+            
+        } else {
             window.addEventListener('click', (e) => {
                 e.stopPropagation();
                 handleToggleAccountMenu(e);
             });
-        } else {
-            console.log('remove');
-            window.removeEventListener('click', handleToggleAccountMenu);
-            avoidlistener=false;
+            avoidlistener=true;
         }
         return () => {
-            avoidlistener = true;
+            avoidlistener = false;
             window.removeEventListener('click', handleToggleAccountMenu);
         }
     }, [handleToggleAccountMenu])
