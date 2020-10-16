@@ -11,6 +11,7 @@
         background-color: darken($color: $primary, $amount: 15);
     }
 }
+
 .btn-google {
     background: #5969F9;
 
@@ -18,8 +19,8 @@
         color: white;
     }
 }
-.btn-default
-.btn-danger {
+
+.btn-default .btn-danger {
     background-color: rgb(250, 119, 119);
     transition: background-color .3s ease;
 
@@ -52,6 +53,7 @@
     border: none;
     background: none;
     transition: all 0.2s;
+
     &:hover {
         background: $light-grey;
     }
@@ -60,7 +62,10 @@
         width: 18px;
     }
 }
-.btn-search, .btn-close{
+
+.btn-search,
+.btn-close,
+.btn-close-search {
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -71,33 +76,55 @@
     border: none;
     background: none;
     padding: 0;
-    &:hover{
+
+    &:hover {
         background: $light-grey;
     }
-    i,svg{
+
+    i,
+    svg {
         font-size: 20px;
     }
 }
-.btn-settings{
+
+.btn-settings {
     @extend .btn-search;
     background: none;
-    margin-right: 10px;;
-    i,svg{
+    margin-right: 10px;
+    ;
+
+    i,
+    svg {
         color: $font-grey;
         font-size: 20px;
     }
 }
-.btn-close-msg{
+
+.btn-close-msg {
     cursor: pointer;
     border: none;
     margin-left: auto;
 }
-.btn-galery{
+
+.btn-galery {
     @extend .btn-bars;
     min-width: 30px;
-        height: 30px;
+    height: 30px;
     margin-right: 10px;
 }
-.btn-add-category:disabled{
-    background-color:  lighten($color: $primary, $amount: 15);
+
+.btn-add-category:disabled {
+    background-color: lighten($color: $primary, $amount: 15);
+}
+
+.selected-phrase__btn-close {
+    position: absolute;
+    width: rem(40);
+}
+.btn-Approve{
+    cursor: pointer;
+    position: absolute;
+    right: rem(30);
+    bottom: rem(5);
+    width: rem(40);
 }

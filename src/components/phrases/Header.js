@@ -66,7 +66,7 @@ export const Header = () => {
                 <form className="phrases__search-form">
                     <button className="btn-search"><i className="fas fa-search"></i></button>
                     <input type="text" placeholder="search" className="phrases__input-search" />
-                    <button className="btn-close"><i className="fas fa-times"></i></button>
+                    <div className="btn-close-search"><i className="fas fa-times"></i></div>
                 </form>
             </div>
             <div className="phrases__profile">

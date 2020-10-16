@@ -1,30 +1,43 @@
 import React from 'react'
-import { IconWrapper } from '../../images/IconWrapper'
+import { useHistory } from 'react-router';
+// import { IconWrapper } from '../../images/IconWrapper'
 
-export const PhrasesEntry = () => {
+export const PhrasesEntry = ({ id, date, message, title, author, url }) => {
+
+    let history = useHistory();
+    const openPhrase = () => {
+        history.push("/home/selectedphrase");
+        // clean the state images
+    }
     return (
-        <div className="phrases__entry">
-            <div className="phrases__entry-picture"
-                style={{
-                    backgroundSize: 'cover',
-                    backgroundImage: 'url(https://images.unsplash.com/photo-1482920387559-08269818bcfc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80)',
-
-                }}>
-
-            </div>
-            <div className="phrases__entry-body">
-                <p className="phrases__entry-title">Title</p>
-                <p className="phrases__entry-content">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto nihil voluptas delectus labore, adipisci quasi in
-                </p>
+        <div className="phrases__entry" id={id} onClick={openPhrase}>
+            {
+                url?.thumb &&
+                <div className="phrases__entry-picture">
+                    <img src={url.thumb} alt={title} />
+                </div>
+            }
+            <div className="phrases__entry-inner" >
+                <div className="phrases__entry-body">
+                    <p className="phrases__entry-title">
+                        {title}
+                    </p>
+                    <p className="phrases__entry-message">
+                        {message}
+                    </p>
+                </div>
+                <div className="phrases__entry-author">
+                    <img src="https://lh5.googleusercontent.com/-JB3Fw5D5AUk/AAAAAAAAAAI/AAAAAAAAAAA/ZCXxHHSfntc/s100-c/photo.jpg" alt="user" />
+                    <span className="d-inline-block text-truncate">{author.name}</span>
+                </div>
                 <div className="phrases__options">
                     <button className="btn-bars">
-                        <IconWrapper icon="archive" className="phrases__icon-phrase" />
+                        <i className="fas fa-archive"></i>
                     </button>
-                    <button  className="btn-bars">
-                        <IconWrapper icon="trash" className="phrases__icon-phrase" />
+                    <button className="btn-bars">
+                        <i className="fas fa-trash"></i>
+                        {/* <IconWrapper icon="trash" className="phrases__icon-phrase" /> */}
                     </button>
-
                 </div>
             </div>
 

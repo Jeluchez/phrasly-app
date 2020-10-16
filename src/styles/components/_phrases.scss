@@ -164,37 +164,74 @@
 }
 
 .phrases__entries {
-    // margin: 0 20px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 230px);
-    gap: 10px;
+    gap: rem(10);
     justify-content: center;
+    padding-bottom: rem(15);
 }
-
 .phrases__entry {
     border: 1px solid $light-grey;
     transition: all .3s;
-
+    display: flex;
+    flex-direction: column;
     &:hover {
         box-shadow: 0px 0px 5px lighten($dark-grey, 10%);
     }
 }
 
 .phrases__entry-picture {
-    height: 120px;
+    display: flex;
+    max-height: rem(200);
+    img {
+        object-fit: cover;
+        flex: 1 auto;
+    }
+
+}
+
+.phrases__entry-inner {
+    display: flex;
+    flex-flow: column;
+    padding: 0 rem(10);
+    padding-top: rem(5);
+    height: 100%;
 }
 
 .phrases__entry-body {
-    padding: 10px;
+    flex: 1 auto;
 }
 
 .phrases__entry-title {
     font-weight: bold;
 }
 
-.phrases__entry-content {
+.phrases__options {
+    padding: rem(5) 0;
+    height: rem(40);
+}
+
+.phrases__entry-message {
     font-size: 14px;
+}
+
+.phrases__entry-author {
+    height: rem(30);
+
+    img {
+        border-radius: 50%;
+        width: rem(24);
+    }
+
+    span {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        margin-left: rem(5);
+        vertical-align: middle;
+        width: rem(80);
+    }
 }
 
 .phrases__niether {

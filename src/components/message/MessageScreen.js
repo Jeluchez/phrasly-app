@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { cleanImages } from '../../actions/imagesFromApi';
+import { cleanAll, cleanImages} from '../../actions/imagesFromApi';
 import { startNewPhrase } from '../../actions/phrases';
 import { useForm } from '../../hooks/useForm';
 
@@ -14,59 +14,70 @@ export const MessageScreen = () => {
     const dispatch = useDispatch();
     const { selected: selectedImage } = useSelector(state => state.images);
     const [isOpenMsg, setOpenMsg] = useState(true);
-    const [formValues, handleInputChange] = useForm({
+    const [formValues, handleInputChange, reset] = useForm({
         title: '',
         message: ''
     });
     const { title, message } = formValues;
-    // toggle message try
-    const handleShowHideMsg = useCallback((ele) => {
 
+    // toggle message try
+    const handleShowHideMsg = (e) => {
+        const ele = e?.target || e;
         // close box message, when click outside
         if ((!ele.closest('.msgs_create-msg-complete') && !createMsgCompleteState) || ele.closest('.btn-close-msg')) {
-            console.log('close window message');
+
             createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
             createMsg.classList.toggle('d-none');
             setOpenMsg(false);
+            console.log("message tray is close:", createMsgCompleteState);
+
         }
         if (ele.closest('.msgs_create-msg')) {
-            console.log('active window message');
+            console.log("message tray is open:");
+            // console.log("message tray:", isOpenMsg);
             setOpenMsg(true);
             createMsgComplete = document.querySelector('.msgs_create-msg-complete');
             createMsg = document.querySelector('.msgs_create-msg');
             createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
             createMsg.classList.toggle('d-none');
         }
-    }, []);
+    }
     // useEffect to show message tray when selecte image
     useEffect(() => {
-        // activate div msgs_create-msg-complete if the image is selected
-        if (avoidaddListener) {
-            window.removeEventListener('click', handleShowHideMsg);
-            const msgDiv = document.querySelector('.msgs_create-msg');
-            handleShowHideMsg(msgDiv);
-        } else {
-            window.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const ele = e.target;
-                handleShowHideMsg(ele);
-            });
-            avoidaddListener = false;
+        if(avoidaddListener || selectedImage){
+            const msg = document.querySelector('.msgs_create-msg');
+            handleShowHideMsg(msg)
+            avoidaddListener=false;
         }
+
+        window.addEventListener('click', handleShowHideMsg);
+
         return () => {
-            avoidaddListener = true;
+            // if message tray is open, and render, then leave open 
+            if (!createMsgCompleteState){
+                avoidaddListener=true;
+            } 
             window.removeEventListener('click', handleShowHideMsg);
         };
-    }, [handleShowHideMsg]);
+    }, [selectedImage]);
 
 
-    // if message try is open, an then click outside
-    // console.log(createMsgCompleteState);
+    // this execute if message try is open, an then click outside
+
     if (isOpenMsg === false) {
         const validateTryMessage = formValidate();
+        // console.log('image: ', selectedImage, 'valditate: ', validateTryMessage);
         if (validateTryMessage) {
             // create phrase
-            dispatch(startNewPhrase());
+            dispatch(startNewPhrase({
+                title,
+                message,
+                url: selectedImage?.urls
+            }));
+            // clean store
+            dispatch(cleanAll());
+            // clean form
+            reset();
         }
     }
     // validate form

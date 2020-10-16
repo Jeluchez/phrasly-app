@@ -33,7 +33,6 @@ export const phrasesReducers = (state = initialState, action) => {
 
     switch (action.type) {
         case types.phrasesLoad:
-        // console.log(action.payload);
             return {
                 ...state,
                 phrases: action.payload

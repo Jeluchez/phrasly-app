@@ -1,7 +1,7 @@
 import { firebase } from "../firebase/firebase-config";
 import { types } from "../types/types";
 
-export const startNewPhrase = () => {
+export const startNewPhrase = ({title,message,url}) => {
     return (dispatch, getState) => {
         const { uid, name } = getState().auth;
 
@@ -11,10 +11,12 @@ export const startNewPhrase = () => {
                 name: name,
                 avatar: ''
             },
-            title: '',
-            message: '',
+            title: title,
+            message: message,
             date: new Date().getTime(),
-            url:''
+            url: {
+                ...url
+            }
         };
         // this is a insert to normal database
         // const phraDoc = await db.collection('phrases').add(newPhrase);

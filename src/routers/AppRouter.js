@@ -12,8 +12,7 @@ import { Checking } from './Checking';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { PhrasesImagesScreen } from '../components/images/PhrasesImagesScreen';
-import { setPhrases, startLoadingPhrases } from '../actions/phrases';
-
+import { SelectedPhrase } from '../components/phrases/SelectedPhrase';
 
 export const AppRouter = () => {
 
@@ -26,8 +25,6 @@ export const AppRouter = () => {
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user?.uid) {
-                const phraSnap = firebase.database().ref('phrases');
-
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
             } else {
@@ -54,6 +51,7 @@ export const AppRouter = () => {
                     <PublicRoute path="/auth" component={AuthRouter} isLoggedIn={isLoggedIn} />
                     <PrivateRoute exact path="/" component={PhrasesScreen} isLoggedIn={isLoggedIn} />
                     <PrivateRoute exact path="/home/photo" component={PhrasesImagesScreen} isLoggedIn={isLoggedIn} />
+                    <PrivateRoute exact path="/home/selectedphrase" component={SelectedPhrase} isLoggedIn={isLoggedIn} />
                 </Switch>
             </div>
         </Router>

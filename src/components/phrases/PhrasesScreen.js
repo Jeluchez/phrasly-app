@@ -14,19 +14,21 @@ export const PhrasesScreen = () => {
     const [loading, setloading] = useState(true);
 
     useEffect(() => {
-        const phraSnap = firebase.database().ref('phrases');
+        const phraSnap = firebase.database().ref('phrases')
 
-        phraSnap.on('value', (snapshot) => {
+        phraSnap.on("value", snapshot => {
             const phrases = [];
-            snapshot.forEach((phrase) => {
-                phrases.push({
-                    id: phrase.key,
-                    ...phrase.val()
-                })
-            });
-            dispatch(setPhrases(phrases));
-            setloading(false);
-        })
+                snapshot.forEach((phrase) => {
+                    phrases.push({
+                        id: phrase.key,
+                        ...phrase.val()
+                    })
+                });
+                // order by date
+                phrases.sort((a,b)=>(new Date(b.date) - new Date(a.date)));
+                dispatch(setPhrases(phrases));
+                setloading(false);
+        });
     }, [dispatch])
     return (
         <div className="phrases__main-content">
