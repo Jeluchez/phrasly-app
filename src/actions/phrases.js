@@ -28,3 +28,7 @@ export const setPhrases = (phrases) =>({
     type: types.phrasesLoad,
     payload: phrases
 })
+export const setPhrase = (phrase) =>({
+    type: types.phraseSelect,
+    payload: phrase
+})

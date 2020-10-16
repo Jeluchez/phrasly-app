@@ -1,13 +1,21 @@
 import React from 'react'
+import { useDispatch} from 'react-redux';
 import { useHistory } from 'react-router';
+import { setPhrase} from '../../actions/phrases';
 // import { IconWrapper } from '../../images/IconWrapper'
 
 export const PhrasesEntry = ({ id, date, message, title, author, url }) => {
 
+    const dispatch = useDispatch();
+
     let history = useHistory();
     const openPhrase = () => {
         history.push("/home/selectedphrase");
-        // clean the state images
+        const phrase ={
+            id, date, message, title, author, url
+        }
+        dispatch(setPhrase(phrase))
+        // save selected phrases
     }
     return (
         <div className="phrases__entry" id={id} onClick={openPhrase}>

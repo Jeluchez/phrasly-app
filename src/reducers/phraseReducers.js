@@ -37,6 +37,11 @@ export const phrasesReducers = (state = initialState, action) => {
                 ...state,
                 phrases: action.payload
             }
+        case types.phraseSelect:
+            return {
+                ...state,
+                selected: {...action.payload}
+            }
         default:
             return state;
     }

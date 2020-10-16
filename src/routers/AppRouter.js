@@ -12,7 +12,7 @@ import { Checking } from './Checking';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { PhrasesImagesScreen } from '../components/images/PhrasesImagesScreen';
-import { SelectedPhrase } from '../components/phrases/SelectedPhrase';
+import { SelectedPhraseScreen } from '../components/phrases/SelectedPhraseScreen';
 
 export const AppRouter = () => {
 
@@ -51,7 +51,7 @@ export const AppRouter = () => {
                     <PublicRoute path="/auth" component={AuthRouter} isLoggedIn={isLoggedIn} />
                     <PrivateRoute exact path="/" component={PhrasesScreen} isLoggedIn={isLoggedIn} />
                     <PrivateRoute exact path="/home/photo" component={PhrasesImagesScreen} isLoggedIn={isLoggedIn} />
-                    <PrivateRoute exact path="/home/selectedphrase" component={SelectedPhrase} isLoggedIn={isLoggedIn} />
+                    <PrivateRoute exact path="/home/selectedphrase" component={SelectedPhraseScreen} isLoggedIn={isLoggedIn} />
                 </Switch>
             </div>
         </Router>

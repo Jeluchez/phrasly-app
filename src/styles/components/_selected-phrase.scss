@@ -5,9 +5,9 @@
 .selected-phrase__entry-picture {
     display: flex;
     max-height: rem(300);
-
+    overflow: hidden;
     img {
-        object-fit: cover;
+        object-fit: none;
         flex: 1 auto;
     }
 
@@ -32,9 +32,6 @@
         width: rem(30);
     }
 }
-
-#selected-phrase_entry {}
-
 .selected-phrase__header{
     padding: rem(5);
     height: rem(30);
