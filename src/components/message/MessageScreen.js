@@ -106,7 +106,7 @@ export const MessageScreen = () => {
                         <img src={selectedImage?.urls?.regular} alt={selectedImage.desc} />
                     </div>
                 }
-                <form className="msgs__form d-flex flex-column">
+                <form className="msgs__form d-flex flex-column pl-2">
                     <input type="text" name="title" placeholder="title" className="msgs__title" autoComplete="off"
                         value={title}
                         onChange={handleInputChange}

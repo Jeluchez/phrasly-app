@@ -48,7 +48,7 @@ export const ImagesGrid = ({ getSearching }) => {
         960: 5,
         768: 4,
         576: 3,
-        300: 1
+        457: 2,
     };
 
     return (

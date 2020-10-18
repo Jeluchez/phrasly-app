@@ -77,6 +77,7 @@
     background: none;
     padding: 0;
     transition: all 0.2s;
+
     &:hover {
         background: $light-grey;
     }
@@ -120,16 +121,19 @@
 .selected-phrase__btn-close {
     cursor: pointer;
     position: absolute;
+    background-color: rgba(32, 33, 36, 0.6);
     width: rem(30);
     height: rem(30);
     border-radius: 50%;
     transition: all 0.2s;
+
     &:hover {
         background: $light-grey;
     }
 
     i,
     svg {
+        color: #fff;
         font-size: 20px;
     }
 }
@@ -137,7 +141,17 @@
 .btn-Approve {
     cursor: pointer;
     position: absolute;
-    right: rem(30);
+    right: 0;
     bottom: rem(5);
     width: rem(40);
+}
+
+.selected-phrase__btn-save {
+    background: $red;
+    color: #fff;
+    transition:  .3s ease;
+
+    &:hover {
+        background-color: lighten($color: $red, $amount: 15);
+    }
 }
