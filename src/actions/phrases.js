@@ -3,6 +3,22 @@ import Swal from 'sweetalert2';
 
 import { types } from "../types/types";
 
+export const loadPhrases = () => {
+    const phraSnap = firebase.database().ref('phrases');
+    const phrases = [];
+    phraSnap.on("value", snapshot => {
+
+        snapshot.forEach((phrase) => {
+            phrases.push({
+                id: phrase.key,
+                ...phrase.val()
+            })
+        });
+        // order by date
+        phrases.sort((a, b) => (new Date(b.date) - new Date(a.date)));
+    });
+    return phrases;
+}
 export const startNewPhrase = ({ title, message, url }) => {
     return (dispatch, getState) => {
         const { uid, name } = getState().auth;
@@ -26,7 +42,7 @@ export const startNewPhrase = ({ title, message, url }) => {
         phraRef.push(newPhrase);
     }
 }
-export const activePhrase = (phrase) =>({
+export const activePhrase = (phrase) => ({
     type: types.phraseSelect,
     payload: phrase
 })
@@ -63,17 +79,15 @@ export const cleanSelectedPhrase = () => ({
 export const cleanAllPhrases = () => ({
     type: types.phrasesLogoutcleanAll
 })
-export const deletePhrase = (id, callback=null) => {
+export const deletePhrase = (id, callback = null) => {
     const phraRef = firebase.database().ref('phrases/' + id);
 
     Swal.fire({
-        title: 'Are you sure to delete it ?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
+        text: "Are you sure to delete it ?",
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        cancelButtonColor: '#eee',
+        confirmButtonText: 'delete'
     }).then((result) => {
         if (result.isConfirmed) {
             phraRef.remove();
@@ -81,4 +95,23 @@ export const deletePhrase = (id, callback=null) => {
         }
     })
     return;
+}
+export const searchPhrases = (search) => {
+
+
+    const curPhrases = loadPhrases();
+    const phrases = curPhrases.filter(phrase => Object.values(phrase).some(val => val.toString().includes(search)));
+
+    // console.log(phrases);
+    return {
+        type: types.phrasesSearch,
+        payload: phrases
+    }
+}
+export const closeSearch = () => {
+    const phrases = loadPhrases();
+    return {
+        type: types.phrasesLoad,
+        payload: phrases
+    }
 }

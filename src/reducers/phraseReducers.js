@@ -42,6 +42,11 @@ export const phrasesReducers = (state = initialState, action) => {
                 ...state,
                 selectedPhrase: { ...action.payload }
             }
+        case types.phrasesSearch:
+            return {
+                ...state,
+                phrases: [...action.payload],
+            }
         case types.phrasesCleanSelectedPhrase:
             // console.log(action.payload);
             return {

@@ -23,6 +23,7 @@ export const types = {
      phrasesLoad: '[phrases] loads phrases',
      phrasesUpdate: '[phrases] update phrase',
      phrasesDelete: '[phrases] delete phrase',
+     phrasesSearch: '[phrases] search phrase',
      phrasesLogoutcleanAll: '[phrases] clean all phrases',
      phrasesCleanSelectedPhrase: '[phrases] clean Selected phrase',
      

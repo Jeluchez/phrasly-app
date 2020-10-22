@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
+import { firebase } from '../../firebase/firebase-config';
+import { useState } from 'react';
 import { MessageScreen } from '../message/MessageScreen'
 import { Header } from './Header'
 import { PhrasesEntries } from './PhrasesEntries'
 import { Sidebar } from './Sidebar'
 import { setPhrases } from '../../actions/phrases';
-import { firebase } from '../../firebase/firebase-config';
-import { useState } from 'react';
+
 
 export const PhrasesScreen = () => {
 
@@ -29,7 +30,8 @@ export const PhrasesScreen = () => {
             dispatch(setPhrases(phrases));
             setloading(false);
         });
-    }, [dispatch])
+    }, [dispatch]);
+
     return (
 
         <div className="phrases__main-content">

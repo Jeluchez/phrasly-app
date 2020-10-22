@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth';
+import { searchPhrases, closeSearch } from '../../actions/phrases';
 import phraslyLogo from '../../images/phrasly.png'
 
 let avoidlistener = false;
@@ -25,11 +26,11 @@ export const Header = () => {
                 spans.forEach((span) => span.classList.remove('hidden'));
             }
         }
-      
+
         return () => {
             mql.removeEventListener("change", resize);
         }
-    }, [mql,spans])
+    }, [mql, spans])
 
 
 
@@ -70,7 +71,23 @@ export const Header = () => {
         }
     }, [handleToggleAccountMenu])
     // hidden account menu, when click in other place
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const search = document.querySelector('.phrases__input-search').value;
+        dispatch(searchPhrases(search));
 
+    }
+    const handleCloseSearch = (e) => {
+        e.preventDefault();
+        const search = document.querySelector('.phrases__input-search');
+        const searchValue = search.value;
+        
+        if (searchValue.trim().length !==0) {
+            dispatch(closeSearch());
+            search.value='';
+        }
+        
+    }
     const handleLogout = () => {
         dispatch(startLogout());
     }
@@ -91,10 +108,12 @@ export const Header = () => {
                 <h4 className="pl-2 .d-inline">Phrasly</h4>
             </div>
             <div className="phrases__search">
-                <form className="phrases__search-form">
-                    <button className="btn-search"><i className="fas fa-search"></i></button>
-                    <input type="text" placeholder="search" className="phrases__input-search" />
-                    <div className="btn-close-search"><i className="fas fa-times"></i></div>
+                <form onSubmit={handleSearch} className="phrases__search-form">
+                    <button className="btn-search" onClick={handleSearch}><i className="fas fa-search"></i></button>
+                    <input type="text" placeholder="search" className="phrases__input-search" name=''
+                        onChange={handleSearch}
+                    />
+                    <div className="btn-close-search" onClick={handleCloseSearch}><i className="fas fa-times"></i></div>
                 </form>
             </div>
             <div className="phrases__profile">
