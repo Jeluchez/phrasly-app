@@ -29,7 +29,9 @@ export const PhrasesImagesScreen = () => {
             reset();
         }
     }
-    const handleAddImage = () => {
+    const handleAddImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         history.replace("/");
     }
     const handleClose = () => {

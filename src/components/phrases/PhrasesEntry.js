@@ -1,7 +1,9 @@
 import React from 'react'
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { setPhrase} from '../../actions/phrases';
+import { Tooltip } from '@material-ui/core';
+
+import { deletePhrase, setPhrase } from '../../actions/phrases';
 // import { IconWrapper } from '../../images/IconWrapper'
 
 export const PhrasesEntry = ({ id, date, message, title, author, url }) => {
@@ -11,14 +13,20 @@ export const PhrasesEntry = ({ id, date, message, title, author, url }) => {
     let history = useHistory();
     const openPhrase = () => {
         history.push("/home/selectedphrase");
-        const phrase ={
+        const phrase = {
             id, date, message, title, author, url
         }
         dispatch(setPhrase(phrase))
         // save selected phrases
     }
+    const handleDelete = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        deletePhrase(id);
+
+    }
     return (
-        <div className="phrases__entry" id={id} onClick={openPhrase}>
+        <div className="phrases__entry animate__animated animate__fadeIn animate__faster" id={id} onClick={openPhrase}>
             {
                 url?.thumb &&
                 <div className="phrases__entry-picture">
@@ -39,13 +47,17 @@ export const PhrasesEntry = ({ id, date, message, title, author, url }) => {
                     <span className="d-inline-block text-truncate">{author?.name}</span>
                 </div>
                 <div className="phrases__options">
-                    <button className="btn-bars">
-                        <i className="fas fa-archive"></i>
-                    </button>
-                    <button className="btn-bars">
-                        <i className="fas fa-trash"></i>
-                        {/* <IconWrapper icon="trash" className="phrases__icon-phrase" /> */}
-                    </button>
+                    <Tooltip title="archive" placement="top" arrow>
+                        <button className="btn-bars">
+                            <i className="fas fa-archive"></i>
+                        </button>
+                    </Tooltip>
+                    <Tooltip title="delete" placement="top" arrow>
+                        <button className="btn-bars" onClick={handleDelete}>
+                            <i className="fas fa-trash"></i>
+                        </button>
+                    </Tooltip>
+
                 </div>
             </div>
 

@@ -58,8 +58,8 @@
         background: $light-grey;
     }
 
-    svg {
-        width: 18px;
+    i,svg {
+        font-size: rem(20);
     }
 }
 
@@ -141,7 +141,7 @@
 .btn-Approve {
     cursor: pointer;
     position: absolute;
-    right: 0;
+    right: rem(7);
     bottom: rem(5);
     width: rem(40);
 }
@@ -154,4 +154,11 @@
     &:hover {
         background-color: lighten($color: $red, $amount: 15);
     }
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: .25em;
+    background: initial;
+    color: #aaa;;
+    font-size: 1.0625em;
 }

@@ -24,5 +24,6 @@ export const types = {
      phrasesUpdate: '[phrases] update phrase',
      phrasesDelete: '[phrases] delete phrase',
      phrasesLogoutcleanAll: '[phrases] clean all phrases',
+     phrasesCleanSelectedPhrase: '[phrases] clean Selected phrase',
      
 }

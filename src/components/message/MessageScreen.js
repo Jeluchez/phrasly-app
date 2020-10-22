@@ -1,8 +1,8 @@
-import React, {useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { cleanAll, cleanImages} from '../../actions/imagesFromApi';
-import { startNewPhrase } from '../../actions/phrases';
+import { cleanAll, cleanImages } from '../../actions/imagesFromApi';
+import { activePhrase, cleanSelectedPhrase, startNewPhrase } from '../../actions/phrases';
 import { useForm } from '../../hooks/useForm';
 
 let createMsgComplete, createMsg = null;
@@ -13,53 +13,69 @@ export const MessageScreen = () => {
     let history = useHistory();
     const dispatch = useDispatch();
     const { selected: selectedImage } = useSelector(state => state.images);
+    const { selectedPhrase } = useSelector(state => (state.phrases), shallowEqual);
+    const url = selectedImage?.urls || null;
+    // console.log(selectedImage);
+    // console.log(selectedPhrase);
     const [isOpenMsg, setOpenMsg] = useState(true);
     const [formValues, handleInputChange, reset] = useForm({
-        title: '',
-        message: ''
+        title: selectedPhrase?.title || '',
+        message: selectedPhrase?.message || ''
     });
+
+    // console.log(formValues);
     const { title, message } = formValues;
 
     // toggle message try
     const handleShowHideMsg = (e) => {
         const ele = e?.target || e;
         // close box message, when click outside
-        if ((!ele.closest('.msgs_create-msg-complete') && !createMsgCompleteState) || ele.closest('.btn-close-msg')) {
-
+        if ((!ele.closest('.msgs_create-msg-complete') && createMsgCompleteState === false) || ele.closest('.btn-close-msg')) {
             createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
             createMsg.classList.toggle('d-none');
             setOpenMsg(false);
-            console.log("message tray is close:", createMsgCompleteState);
-
+            console.log("message tray is close: ", createMsgCompleteState);
         }
         if (ele.closest('.msgs_create-msg')) {
-            console.log("message tray is open:");
-            // console.log("message tray:", isOpenMsg);
-            setOpenMsg(true);
+            console.log("message tray is open");
+
             createMsgComplete = document.querySelector('.msgs_create-msg-complete');
             createMsg = document.querySelector('.msgs_create-msg');
             createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
             createMsg.classList.toggle('d-none');
+            setOpenMsg(true);
         }
     }
     // useEffect to show message tray when selecte image
     useEffect(() => {
-        if(avoidaddListener || selectedImage){
+        if (avoidaddListener || selectedImage) {
             const msg = document.querySelector('.msgs_create-msg');
             handleShowHideMsg(msg)
-            avoidaddListener=false;
+            avoidaddListener = false;
+
         }
 
         window.addEventListener('click', handleShowHideMsg);
 
         return () => {
             // if message tray is open, and render, then leave open 
-            if (!createMsgCompleteState){
-                avoidaddListener=true;
-            } 
+            if (!createMsgCompleteState) {
+                avoidaddListener = true;
+                createMsgCompleteState=true;
+            }
             window.removeEventListener('click', handleShowHideMsg);
         };
     }, [selectedImage]);
+    // useeffecct for save every time to write in message try input
+    useEffect(() => {
+        // console.log('hello0');
+        dispatch(activePhrase({
+            title,
+            message,
+            url: url
+        }))
+
+    }, [title, message, url, dispatch])
 
 
     // this execute if message try is open, an then click outside
@@ -69,16 +85,27 @@ export const MessageScreen = () => {
         // console.log('image: ', selectedImage, 'valditate: ', validateTryMessage);
         if (validateTryMessage) {
             // create phrase
-            dispatch(startNewPhrase({
-                title,
-                message,
-                url: selectedImage?.urls
-            }));
+            setTimeout(() => {
+                dispatch(startNewPhrase({
+                    title,
+                    message,
+                    url: selectedImage?.urls
+                }));
+            }, 200);
+
             // clean store
             dispatch(cleanAll());
             // clean form
-            reset();
+            reset({
+                title: '',
+                message: ''
+            });
+            // clean selected phrase
+            dispatch(cleanSelectedPhrase());
+            // close message tray
+            setOpenMsg(true);
         }
+
     }
     // validate form
     function formValidate() {
