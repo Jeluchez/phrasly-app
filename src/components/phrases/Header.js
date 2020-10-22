@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef} from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth';
 import phraslyLogo from '../../images/phrasly.png'
@@ -10,6 +10,28 @@ export const Header = () => {
     const { name } = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const accountMenu = useRef();
+    const spans = document.querySelectorAll('.phrases__item span');
+    const mql = window.matchMedia("(max-width: 768px)");
+
+    // hide span when max-with: 756px;
+    useEffect(() => {
+        mql.addEventListener("change", resize);
+        mql && resize(mql);
+        function resize(e) {
+            e = e || this;
+            if (e.matches) { // If media query matches
+                spans.forEach((span) => span.classList.add('hidden'));
+            } else {
+                spans.forEach((span) => span.classList.remove('hidden'));
+            }
+        }
+      
+        return () => {
+            mql.removeEventListener("change", resize);
+        }
+    }, [mql,spans])
+
+
 
     const handleToggleAccountMenu = useCallback((e) => {
         const ele = e.target;
@@ -34,13 +56,13 @@ export const Header = () => {
         if (avoidlistener) {
             console.log('remove');
             window.removeEventListener('click', handleToggleAccountMenu);
-            
+
         } else {
             window.addEventListener('click', (e) => {
                 e.stopPropagation();
                 handleToggleAccountMenu(e);
             });
-            avoidlistener=true;
+            avoidlistener = true;
         }
         return () => {
             avoidlistener = false;
@@ -53,14 +75,20 @@ export const Header = () => {
         dispatch(startLogout());
     }
 
+    const handleToggle = () => {
+        console.log('clik');
+        spans.forEach((span) => span.classList.toggle('hidden'));
+    }
+
+
     return (
         <header className="phrases__header">
-            <div className="btn-bars">
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" className="svg-inline--fa fa-bars fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
+            <div className="btn-bars" onClick={handleToggle}>
+                <i className="fas fa-bars"></i>
             </div>
             <div className="logo">
                 <img src={phraslyLogo} alt="logo phrasly" />
-                <h4 className="d-inline pl-2">Phrasly</h4>
+                <h4 className="pl-2 .d-inline">Phrasly</h4>
             </div>
             <div className="phrases__search">
                 <form className="phrases__search-form">

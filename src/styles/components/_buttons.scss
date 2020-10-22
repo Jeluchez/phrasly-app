@@ -58,8 +58,8 @@
         background: $light-grey;
     }
 
-    svg {
-        width: 18px;
+    i,svg {
+        font-size: rem(20);
     }
 }
 
@@ -141,7 +141,7 @@
 .btn-Approve {
     cursor: pointer;
     position: absolute;
-    right: 0;
+    right: rem(7);
     bottom: rem(5);
     width: rem(40);
 }

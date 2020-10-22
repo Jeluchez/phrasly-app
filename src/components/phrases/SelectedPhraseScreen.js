@@ -3,44 +3,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import moment from 'moment';
 
+
 import noFoundImage from '../../images/no_found_image.PNG'
 import { useForm } from '../../hooks/useForm';
-import { updatePhrase } from '../../actions/phrases';
+import { cleanSelectedPhrase, deletePhrase, updatePhrase } from '../../actions/phrases';
+import { showToastr } from '../../ui/msg.ui';
 
 export const SelectedPhraseScreen = () => {
 
     const dispatch = useDispatch();
     let history = useHistory();
-    const { selected } = useSelector(state => state.phrases);
+    const { selectedPhrase } = useSelector(state => state.phrases);
     const [formValues, handleInputChange] = useForm({
-        title: selected?.title,
-        message: selected?.message
+        title: selectedPhrase?.title,
+        message: selectedPhrase?.message
     });
     const { title, message } = formValues;
     let id, date, author, url;
 
-    if (selected) {
-        id = selected.id;
-        date = moment(selected.date);
-        author = selected.author;
-        url = selected.url;
+    if (selectedPhrase) {
+        id = selectedPhrase.id;
+        date = moment(selectedPhrase.date);
+        author = selectedPhrase.author;
+        url = selectedPhrase.url;
     }
 
     const handleSave = () => {
         console.log('save');
         const phrase = {
-            author: selected.author,
-            date: moment(selected.date),
-            id: selected.id,
+            author: selectedPhrase.author,
+            date: moment(selectedPhrase.date),
+            id: selectedPhrase.id,
             message: message,
             title: title,
-            url: selected.url
+            url: selectedPhrase.url
         }
         // updatePhrase
-        dispatch(updatePhrase(phrase))
+        dispatch(updatePhrase(phrase));
+        showToastr("Phrase has been save!", 2000);
+    }
+    const handleDelete = () => {
+
+        deletePhrase(id, (res) => {
+            res && history.replace("/");
+        })
+
     }
     const handleClose = () => {
         history.push("/");
+        // cleant select phrases
+        dispatch(cleanSelectedPhrase());
     }
 
     return (
@@ -66,7 +78,7 @@ export const SelectedPhraseScreen = () => {
                     </header>
                     <div className="selected-phrase__entry-picture d-flex justify-content-center">
 
-                        <img src={selected?.url?.regular || noFoundImage} alt={selected?.title || "some"} />
+                        <img src={selectedPhrase?.url?.regular || noFoundImage} alt={selectedPhrase?.title || "some"} />
 
                     </div>
 
@@ -85,18 +97,22 @@ export const SelectedPhraseScreen = () => {
                             onChange={handleInputChange}
                         ></textarea>
                     </form>
-                    <div className="phrases__entry-author">
-                        <img src="https://lh5.googleusercontent.com/-JB3Fw5D5AUk/AAAAAAAAAAI/AAAAAAAAAAA/ZCXxHHSfntc/s100-c/photo.jpg" alt="user" />
-                        <span className="d-inline-block text-truncate">{author?.name}</span>
+                    <div className="selected-phrase__author-options d-flex align-content-center">
+                        <div className="phrases__entry-author">
+                            <img src="https://lh5.googleusercontent.com/-JB3Fw5D5AUk/AAAAAAAAAAI/AAAAAAAAAAA/ZCXxHHSfntc/s100-c/photo.jpg" alt="user" />
+                            <span className="d-inline-block text-truncate">{author?.name}</span>
+                        </div>
+                        <div className="selected-phrase__date text-right ml-auto">
+                            <p>Editado<span> {date?.format('Do MMMM YYYY') || "00/00/0000"}</span></p>
+                        </div>
                     </div>
-                    <div className="selected-phrase__date text-right" >
-                        Editado<span> {date?.format('Do MMMM YYYY') || "00/00/0000"}</span>
-                    </div>
+
+
                     <div className="selected-phrase__options mt-4">
                         <button className="btn-bars">
                             <i className="fas fa-archive"></i>
                         </button>
-                        <button className="btn-bars">
+                        <button className="btn-bars" onClick={handleDelete}>
                             <i className="fas fa-trash"></i>
                         </button>
                         <button className="btn-bars" onClick={handleSave}>
@@ -119,6 +135,7 @@ export const SelectedPhraseScreen = () => {
                             <textarea
                                 placeholder="Write your phrase..."
                                 className="msgs__textarea"
+                                rows="4"
                                 name="message"
                                 value={"natus saepe mollitia quidem officiis ab recusandae tempora voluptates laboriosam iure vitae esse nulla."}
                             ></textarea>

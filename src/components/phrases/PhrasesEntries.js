@@ -6,15 +6,13 @@ export const PhrasesEntries = () => {
     const { phrases } = useSelector(state => state.phrases);
 
     return (
-        <div>
-            <div className="phrases__entries">
-                {
-                    phrases.map(phrase => (
-                        <PhrasesEntry key={phrase.id} {...phrase}/>
-                    ))
-                }
-               
-            </div>
+        <div className="phrases__entries">
+            {
+                phrases.map(phrase => (
+                    <PhrasesEntry key={phrase.id} {...phrase} />
+                ))
+            }
+
         </div>
     )
 }

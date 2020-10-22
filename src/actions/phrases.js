@@ -1,4 +1,6 @@
 import { firebase } from "../firebase/firebase-config";
+import Swal from 'sweetalert2';
+
 import { types } from "../types/types";
 
 export const startNewPhrase = ({ title, message, url }) => {
@@ -24,6 +26,10 @@ export const startNewPhrase = ({ title, message, url }) => {
         phraRef.push(newPhrase);
     }
 }
+export const activePhrase = (phrase) =>({
+    type: types.phraseSelect,
+    payload: phrase
+})
 export const setPhrases = (phrases) => ({
     type: types.phrasesLoad,
     payload: phrases
@@ -50,6 +56,29 @@ export const updatePhrase = (phrase) => {
         });
 
     }
-    // type: types.phraseSelect,
-    //     payload: phrase
+}
+export const cleanSelectedPhrase = () => ({
+    type: types.phrasesCleanSelectedPhrase
+})
+export const cleanAllPhrases = () => ({
+    type: types.phrasesLogoutcleanAll
+})
+export const deletePhrase = (id, callback=null) => {
+    const phraRef = firebase.database().ref('phrases/' + id);
+
+    Swal.fire({
+        title: 'Are you sure to delete it ?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            phraRef.remove();
+            callback && callback(true);
+        }
+    })
+    return;
 }

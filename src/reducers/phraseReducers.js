@@ -27,7 +27,7 @@ import { types } from "../types/types";
 */
 const initialState = {
     phrases: [],
-    selected: null
+    selectedPhrase: null
 }
 export const phrasesReducers = (state = initialState, action) => {
 
@@ -40,7 +40,19 @@ export const phrasesReducers = (state = initialState, action) => {
         case types.phraseSelect:
             return {
                 ...state,
-                selected: {...action.payload}
+                selectedPhrase: { ...action.payload }
+            }
+        case types.phrasesCleanSelectedPhrase:
+            // console.log(action.payload);
+            return {
+                ...state,
+                selectedPhrase: null
+            }
+        case types.phrasesLogoutcleanAll:
+            // console.log(action.payload);
+            return {
+                phrases: [],
+                selectedPhrase: null
             }
         default:
             return state;

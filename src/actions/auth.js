@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { googleAppProvider, firebase } from "../firebase/firebase-config";
 import { finishLoading, startLoading } from "./ui";
 import { cleanAll} from "./imagesFromApi";
+import { cleanAllPhrases } from "./phrases";
 
 
 export const startLoginEmailPassword = (email, password) => {
@@ -34,6 +35,7 @@ export const startGoogleLogin = () => {
             })
             .catch((e) => {
                 console.log(e);
+                dispatch(finishLoading());
             })
     }
 }
@@ -71,6 +73,7 @@ export const startLogout = () => {
         await firebase.auth().signOut();
         dispatch(logout());
         dispatch(cleanAll());
+        dispatch(cleanAllPhrases());
     }
 }
 export const logout = () => ({
