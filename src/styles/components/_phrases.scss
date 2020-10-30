@@ -292,7 +292,6 @@
         i {
             font-size: rem(20);
         }
-        
     }
     .logo {
 
@@ -300,7 +299,6 @@
             display: none !important;
         }
     }
-
     .phrases__search {
         padding-left: 0;
     }
@@ -315,6 +313,13 @@
             object-fit: cover;
             max-width: 100%;
         }
+    }
+    .phrases__sidebar{
+        min-width: rem(30);
+    }
+    .phrases__item {
+        padding: 0;
+        padding-left: rem(5);
     }
 }
 
