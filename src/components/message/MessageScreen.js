@@ -34,10 +34,10 @@ export const MessageScreen = () => {
             createMsgCompleteState = createMsgComplete.classList.toggle('d-none');
             createMsg.classList.toggle('d-none');
             setOpenMsg(false);
-            console.log("message tray is close: ", createMsgCompleteState);
+            // console.log("message tray is close: ", createMsgCompleteState);
         }
         if (ele.closest('.msgs_create-msg')) {
-            console.log("message tray is open");
+            // console.log("message tray is open");
 
             createMsgComplete = document.querySelector('.msgs_create-msg-complete');
             createMsg = document.querySelector('.msgs_create-msg');

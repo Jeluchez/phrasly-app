@@ -8,39 +8,46 @@ import noFoundImage from '../../images/no_found_image.PNG'
 import { useForm } from '../../hooks/useForm';
 import { cleanSelectedPhrase, deletePhrase, updatePhrase } from '../../actions/phrases';
 import { showToastr } from '../../ui/msg.ui';
+import { cleanAll, cleanImages } from '../../actions/imagesFromApi';
 
 export const SelectedPhraseScreen = () => {
 
     const dispatch = useDispatch();
     let history = useHistory();
     const { selectedPhrase } = useSelector(state => state.phrases);
+    const { selected } = useSelector(state => state.images);
     const [formValues, handleInputChange] = useForm({
         title: selectedPhrase?.title,
         message: selectedPhrase?.message
     });
     const { title, message } = formValues;
-    let id, date, author, url;
+    let id, date, author;
 
     if (selectedPhrase) {
         id = selectedPhrase.id;
         date = moment(selectedPhrase.date);
         author = selectedPhrase.author;
-        url = selectedPhrase.url;
+        // url = selectedPhrase.url;
     }
 
     const handleSave = () => {
-        console.log('save');
+        // console.log('save');
         const phrase = {
             author: selectedPhrase.author,
             date: moment(selectedPhrase.date),
             id: selectedPhrase.id,
             message: message,
             title: title,
-            url: selectedPhrase.url
+            url: selected?.urls || selectedPhrase.url 
         }
         // updatePhrase
         dispatch(updatePhrase(phrase));
         showToastr("Phrase has been save!", 2000);
+    }
+    const handleChangeImage = () => {
+        history.push("/home/photo");
+        // clean the state images
+        dispatch(cleanImages());
     }
     const handleDelete = () => {
 
@@ -53,6 +60,9 @@ export const SelectedPhraseScreen = () => {
         history.push("/");
         // cleant select phrases
         dispatch(cleanSelectedPhrase());
+        // clean images download from Api and image selected
+        dispatch(cleanAll());
+        
     }
 
     return (
@@ -76,9 +86,9 @@ export const SelectedPhraseScreen = () => {
                             </div>
                         </div>
                     </header>
-                    <div className="selected-phrase__entry-picture d-flex justify-content-center">
+                    <div className="selected-phrase__entry-picture d-flex justify-content-center" onClick={handleChangeImage}>
 
-                        <img src={selectedPhrase?.url?.regular || noFoundImage} alt={selectedPhrase?.title || "some"} />
+                        <img src={(selected?.urls.regular || selectedPhrase?.url?.regular) || (selected?.urls.regular || noFoundImage)} alt={selectedPhrase?.title || "some"} />
 
                     </div>
 
@@ -100,7 +110,7 @@ export const SelectedPhraseScreen = () => {
                     <div className="selected-phrase__author-options d-flex align-content-center">
                         <div className="phrases__entry-author">
                             <img src="https://lh5.googleusercontent.com/-JB3Fw5D5AUk/AAAAAAAAAAI/AAAAAAAAAAA/ZCXxHHSfntc/s100-c/photo.jpg" alt="user" />
-                            <span className="d-inline-block text-truncate">{author?.name}</span>
+                            <span className="d-inline-block text-truncate">{author?.autName}</span>
                         </div>
                         <div className="selected-phrase__date text-right ml-auto">
                             <p>Editado<span> {date?.format('Do MMMM YYYY') || "00/00/0000"}</span></p>
@@ -129,7 +139,6 @@ export const SelectedPhraseScreen = () => {
                     <div className="observation-item">
                         <form className="msg__form d-flex flex-column">
                             <input type="text" name="title" placeholder="title" className="msgs__title" autoComplete="off"
-                                value={""}
                             />
 
                             <textarea

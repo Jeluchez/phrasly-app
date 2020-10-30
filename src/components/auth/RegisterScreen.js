@@ -18,8 +18,8 @@ export const RegisterScreen = () => {
     const [formValues, handleInputChange] = useForm({
         name: '',
         email: '',
-        password: '123456',
-        confirm: '123456'
+        password: '',
+        confirm: ''
     });
     const [msg, setMsg] = useState({
         nameMsg: '',

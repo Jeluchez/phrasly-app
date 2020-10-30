@@ -36,9 +36,8 @@ export const ImagesGrid = ({ getSearching }) => {
         const scrollIndicate = Math.trunc(scrollHeight - scrollTop);
         
         if (scrollIndicate <= (clientHeight+50)) {
-            console.log(clientHeight);
+            // console.log(clientHeight);
             setpage(page + 1);
-            // console.log(images);
         }
     }
     const breakpointColumnsObj = {

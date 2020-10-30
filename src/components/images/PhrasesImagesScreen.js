@@ -32,14 +32,14 @@ export const PhrasesImagesScreen = () => {
     const handleAddImage = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        history.replace("/");
+        history.goBack();
     }
     const handleClose = () => {
         history.replace("/");
     }
     const handleCancel = () => {
         dispatch(cleanAll());
-        history.replace("/");
+        history.goBack();
     }
 
     return (
