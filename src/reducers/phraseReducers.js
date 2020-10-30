@@ -1,5 +1,25 @@
 import { types } from "../types/types";
+// const phrase = {
+    //     title: 'algo',
+    //     message: 'bien',
+    //     date: 'date',
+    //     updateDate: 'aja',
+    //     author: {
+    //         name: 'jose',
+    //         id: 2,
 
+    //     },
+    //     observations:
+    //     {
+    //         userName: 'lusia',
+    //         weird: 2,
+    //         imageUrl: {
+    //             regula: 'hashdhasdh',
+    //             thumb: 'asdasdasd'
+    //         },
+    //         tag: ['sin', 'peace']
+    //     }
+    // }
 /*
 {
     phrases: []

@@ -9,8 +9,11 @@
     box-shadow: 0px 1px 3px $light-grey;
     color: #5F6368;
 
-    * {
+    h3{
         margin: 5px 20px;
+    }
+    .btn-close{
+        margin-right: rem(20);
     }
 }
 

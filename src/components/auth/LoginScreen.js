@@ -55,6 +55,7 @@ export const LoginScreen = () => {
             passwordMsg = 'password should be at least 6 characters'
             valid = false;
         }
+        
         setMsg({
             ...msg,
             emailMsg,
@@ -76,10 +77,10 @@ export const LoginScreen = () => {
             <form onSubmit={handleLogin} className="auth__form">
                 <h3 className="auth__title pt-5 pb-3 text-center">Log In</h3>
                 <div className="auth__social-nets">
-                    <button className="btn btn-google" onClick={handleGoogleLogin}>
+                    <div className="btn btn-google" onClick={handleGoogleLogin}>
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                         <span>sing with google</span>
-                    </button>
+                    </div>
                     <button className="btn btn-facebook">
                         <img className="facebook-icon" src="https://cdn.worldvectorlogo.com/logos/facebook-2.svg" alt="facebook button" />
                         <span>sing with facebook</span>

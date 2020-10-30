@@ -44,7 +44,7 @@ export const PhrasesEntry = ({ id, date, message, title, author, url }) => {
                 </div>
                 <div className="phrases__entry-author">
                     <img src="https://lh5.googleusercontent.com/-JB3Fw5D5AUk/AAAAAAAAAAI/AAAAAAAAAAA/ZCXxHHSfntc/s100-c/photo.jpg" alt="user" />
-                    <span className="d-inline-block text-truncate">{author?.name}</span>
+                    <span className="d-inline-block text-truncate">{author?.autName}</span>
                 </div>
                 <div className="phrases__options">
                     <Tooltip title="archive" placement="top" arrow>

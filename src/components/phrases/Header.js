@@ -22,8 +22,6 @@ export const Header = () => {
             e = e || this;
             if (e.matches) { // If media query matches
                 spans.forEach((span) => span.classList.add('hidden'));
-            } else {
-                spans.forEach((span) => span.classList.remove('hidden'));
             }
         }
 
